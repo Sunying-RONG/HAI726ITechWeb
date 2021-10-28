@@ -34,6 +34,17 @@
       }
       echo "</ul>";
     ?>
+
+    <select name="marque" id="select">
+      <?php
+        $sql2="SELECT distinct marque FROM produits;";
+        $res=$dbh->query($sql2);
+        foreach($res as $enr) {
+          echo "<option value='$enr['marque']'>".$enr['marque']."</option>";
+        }
+      ?>
+    </select>
+    
   </body>
 </html>
 
