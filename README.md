@@ -35,16 +35,25 @@ creation de commandes --> commandes(etat 0 1) et lignescommandes
 %like
 
 categorie
+
 marque
+
 nom de produits
+
 prix max
+
 mots clefs
+
 synchro
+
 js
 
 localhost:8888/rechercheProduits.php?para=p$para2=p2
 
 https://phpmyadmin.etu.umontpellier.fr/index.php?server=2
+
 e20210011437
+
 sunying
+
 mysql...
