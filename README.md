@@ -11,7 +11,7 @@ X2go Linux, Mysql database of university
 `>use e20210011437` // use database  
 `>show tables;`
 
-tales :  
+tables :  
 clients  
 produits  
 commandes --> clients  
@@ -58,3 +58,5 @@ formulaire HTML, php dans action de form (modifier du script rechercheProduits.p
     prix max (zone de saisi)  
 .HTML  
 .php valeur de database dynamique   
+
+ auto-increment
