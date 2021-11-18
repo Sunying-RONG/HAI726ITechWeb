@@ -4,6 +4,7 @@
       <meta charset="UTF-8" />
   </head>
   <body>
+    
     <?php
       $WHERE = "";
       $INFOS = "";
@@ -28,6 +29,8 @@
       $sth->execute();
       $result = $sth->fetchAll();
 
+      print_r($result);
+
       echo "<ul>";
       foreach ($result as $enr) {
          echo "<li>".$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros</li>";
@@ -40,11 +43,12 @@
         $sql2="SELECT distinct marque FROM produits;";
         $res=$dbh->query($sql2);
         foreach($res as $enr) {
-          echo "<option value='$enr['marque']'>".$enr['marque']."</option>";
+          echo "<option value=".$enr['marque'].">".$enr['marque']."</option>";
         }
       ?>
     </select>
     
   </body>
 </html>
+<!-- echo "<li>".$enr['nom']." (".$enr['catégorie'].") : ".$enr['prix']."</li>"; -->
 

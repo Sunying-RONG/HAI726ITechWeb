@@ -20,10 +20,8 @@ lignescommandes --> commandes, produits
 
 produits.sql  
 `CREATE TABLE IF NOT EXISTS produits`  
-`>source produits.sql;`  
-ou  
-http://localhost/phpmyadmin
-
+`>source produits.sql;` import script, mise a jour, create table
+`>select * from produits` afficher les tuples, les donees
 
 database centrale, php peut etre local  
 pdo  
@@ -45,7 +43,12 @@ mots clefs
 synchro  
 js  
 
-localhost:8888/rechercheProduits.php?para=p$para2=p2
+localhost:8888/rechercheProduitsGenerique
+
+if a server already execute
+`>ps -edf`
+`>ps -edf | grep php`
+`>kill -9 60078`
 
 https://phpmyadmin.etu.umontpellier.fr/index.php?server=2  
 e20210011437  
