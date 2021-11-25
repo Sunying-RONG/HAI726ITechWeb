@@ -68,3 +68,17 @@ système
  bash 
 
  javascript
+
+Comment mémoriser des informations sur la navigation sans être obligé de les sauver en BD ? 
+- (plus utilisé) cookies : côté client
+- session : côté serveur, géré par le serveur HTTP
+``
+<?php session_start();?>
+``
+Au début de tous les scriipts php qui vont utilisé la session (càd avant <html>)
+
+- mise à disposition du tableau superglobal
+$_session['mail] = ...; 
+$mail = $_session['mail']; 
+$_GET 
+$_POST
