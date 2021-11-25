@@ -37,16 +37,50 @@
       }
       echo "</ul>";
     ?>
+    <form action="panier.php" method="post">
+      <select name="categorie" id="">
+        <?php
+          $sql="SELECT distinct catégorie FROM produits;";
+          $res=$dbh->query($sql);
+          foreach($res as $enr) {
+            echo "<option value=".$enr['catégorie'].">".$enr['catégorie']."</option>";
+          }
+        ?>
+      </select>
+      <select name="marque" id="">
+        <?php
+          $sql="SELECT distinct marque FROM produits;";
+          $res=$dbh->query($sql);
+          foreach($res as $enr) {
+            echo "<option value=".$enr['marque'].">".$enr['marque']."</option>";
+          }
+        ?>
+      </select>
+      <select name="nom" id="">
+        <?php
+          $sql="SELECT distinct nom FROM produits;";
+          $res=$dbh->query($sql);
+          foreach($res as $enr) {
+            echo "<option value=".$enr['nom'].">".$enr['nom']."</option>";
+          }
+        ?>
+      </select>
+      <select name="prix" id="">
+        <?php
+          $sql="SELECT distinct prix FROM produits;";
+          $res=$dbh->query($sql);
+          foreach($res as $enr) {
+            echo "<option value=".$enr['prix'].">".$enr['prix']."</option>";
+          }
+        ?>
+      </select>
+      <input type="number" name="nombre" min="0">
+      <input type="submit" name="submit_button" value="Ajouter dans panier">
+    </form>
+   
 
-    <select name="marque" id="select">
-      <?php
-        $sql2="SELECT distinct marque FROM produits;";
-        $res=$dbh->query($sql2);
-        foreach($res as $enr) {
-          echo "<option value=".$enr['marque'].">".$enr['marque']."</option>";
-        }
-      ?>
-    </select>
+
+
     
   </body>
 </html>
