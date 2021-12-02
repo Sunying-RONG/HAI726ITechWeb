@@ -10,11 +10,11 @@
       $INFOS = "";
       foreach ($_GET as $nom => $valeur) {
        if ($valeur != "") {
-           if ($WHERE == "") $WHERE .= "WHERE ";
-           else              $WHERE .= " AND ";
-           $WHERE .= "$nom='$valeur'";
-           $INFOS .= "$nom='$valeur' ";
-        }
+        if ($WHERE == "") $WHERE .= "WHERE ";
+        else              $WHERE .= " AND ";
+        $WHERE .= "$nom='$valeur'";
+        $INFOS .= "$nom='$valeur' ";
+     }
       }
       echo "<h3> Liste des produits : $INFOS </h3>";    
       $sql = "SELECT * FROM produits $WHERE;";      
@@ -79,7 +79,7 @@
     </form>
    
 
-
+    <a href="CreationCompte.php">Vous inscrire</a>
 
     
   </body>
