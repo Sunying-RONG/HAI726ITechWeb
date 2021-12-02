@@ -29,8 +29,6 @@
       $sth->execute();
       $result = $sth->fetchAll();
 
-      // print_r($result);
-
       echo "<ul>";
       foreach ($result as $enr) {
         echo "<li>".$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros</li>";
@@ -41,6 +39,7 @@
     <form action="rechercheProduitsGenerique.php" method="get">
       <p>Catégorie</p>
       <select name="catégorie" id="">
+        <option value=''>Tous</option>
         <?php
           $sql="SELECT distinct catégorie FROM produits;";
           $res=$dbh->query($sql);
@@ -52,6 +51,7 @@
       <br>
       <p>Marque</p>
       <select name="marque" id="">
+        <option value=''>Tous</option>
         <?php
           $sql="SELECT distinct marque FROM produits;";
           $res=$dbh->query($sql);
@@ -63,11 +63,12 @@
       <br>
       <p>Nom</p>
       <select name="nom" id="">
+        <option value=''>Tous</option>
         <?php
           $sql="SELECT distinct nom FROM produits;";
           $res=$dbh->query($sql);
           foreach($res as $enr) {
-            echo "<option value=".$enr['nom'].">".$enr['nom']."</option>";
+            echo "<option value='".$enr['nom']."'>".$enr['nom']."</option>";
           }
         ?>
       </select>
@@ -75,36 +76,70 @@
       <p>Prix max</p>
       <input type="number" name="prix_max" min="1">
       <br><br>
-      <input type="submit" name="submit_button" value="Ajouter article dans panier">
+      <input type="submit" name="rechercher" value="Rechercher">
     </form>
 
     <?php
-      $WHERE = "";
-      echo "<h3> Liste des produits : </h3>"; 
-      foreach ($_GET as $nom => $valeur) {
-        echo $nom;
-        echo ": ";
-        echo $valeur;
-        echo "<br>";
-        if ($valeur != "" && $nom != "submit_button") {
-          if ($WHERE == "") $WHERE .= "WHERE ";
-          else              $WHERE .= " AND ";
-          $WHERE .= "$nom='$valeur'";
+      if (isset($_GET['rechercher'])) {
+        $WHERE = "";
+        echo "<h3> Liste des produits : </h3>"; 
+        print_r($_GET);
+        foreach ($_GET as $nom => $valeur) {
+          // echo $nom;
+          // echo ": ";
+          // echo "$valeur";
+          // echo "<br>";
+          if ($valeur != "" && $nom != "rechercher") {
+            if ($WHERE == "") {
+              $WHERE .= "WHERE ";
+            } else {
+              $WHERE .= " AND ";
+            }
+            if ($nom == "prix_max") {
+              $WHERE .= "prix<='$valeur'";
+            } else {
+              $WHERE .= "$nom='$valeur'";
+            }
+          }
         }
-      }
-     
-      $sql="SELECT * FROM produits $WHERE;";
-      echo $sql;
-      $sth = $dbh->prepare($sql);
-      $sth->execute();
-      $result = $sth->fetchAll();
+      
+        $sql="SELECT * FROM produits $WHERE;";
+        echo $sql;
+        $sth = $dbh->prepare($sql);
+        $sth->execute();
+        $result = $sth->fetchAll();
 
-      echo "<ul>";
-      foreach ($result as $enr) {
-        echo "<li>".$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros</li>";
+        // echo "<ul>";
+        // foreach ($result as $enr) {
+        //   echo "<li>".$enr['numProduit'].$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros</li>";
+        // }
+        // echo "</ul>";
       }
-      echo "</ul>";
     ?>
+
+    <form action="rechercheProduitsGenerique.php" method="get">
+      <?php
+        
+        # Valiser was clicked
+        foreach ($result as $enr) {
+          // echo $enr['numProduit'];
+          echo '<div>';
+            echo '<input type="number" name="'.$enr['numProduit'].'" min="0">';
+            echo "<p>".$enr['numProduit'].$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros </p>";
+            // echo '<input type="checkbox" id="'.$enr['numProduit'].'" value="'.$enr['numProduit'].'">';
+            // echo '<label for="'.$enr['numProduit'].'">'.$enr['numProduit'].$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros</label>";
+          echo '</div>';
+        }
+        // print_r($_GET);
+      ?>
+      <br>
+      <div>
+        <button type="submit" name="valider">Valider</button>
+      </div>
+    </form>
+    <!-- if (isset($_GET['valider'])) {} -->
+      
+    
       <!-- <p>Nombre</p>
       <input type="number" name="nombre" min="0">
       <br>
