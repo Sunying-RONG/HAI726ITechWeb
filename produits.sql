@@ -35,11 +35,14 @@ INSERT INTO commandes (idCommande, calendrier, email) VALUES
 (1, 20200101, 'test');
 
 CREATE TABLE IF NOT EXISTS lignescommandes (
-  idlignecommandes int(5) NOT NULL PRIMARY KEY,
+  idlignecommandes int(5) NOT NULL,
   idCommande int(5), FOREIGN KEY(idCommande) REFERENCES commandes(idCommande) ON DELETE CASCADE,
   idProduit INT, FOREIGN KEY(idProduit) REFERENCES produits(numProduit) ON DELETE CASCADE,
-  quantité int(3),
-  montant float(5.2));
+  quantité int(3), 
+  montant float(5.2),
+  constraint lcPK (idlignecommandes, idCommande)
+  );
+
 
 INSERT INTO lignescommandes (idlignecommandes, idCommande, idProduit, quantité, montant) VALUES
 (1,1,2,2,999.98);

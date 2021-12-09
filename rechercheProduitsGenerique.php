@@ -18,7 +18,7 @@
       //   }
       // }
       // echo "<h3> Liste des produits : $INFOS </h3>";    
-      $sql = "SELECT * FROM produits;";      
+      $sql = "SELECT * FROM produits;"; 
       echo $sql; /* Pour le déboguage */
       
       $dsn = 'mysql:host=mysql.etu.umontpellier.fr;dbname=e20210011437;charset=UTF8';
@@ -83,7 +83,6 @@
       <br><br>
       <input type="submit" name="rechercher" value="Rechercher">
     </form>
-
     <?php
       if (isset($_GET['rechercher'])) {
         $WHERE = "";
@@ -158,3 +157,25 @@
   </body>
 </html>
 <!-- Pour forcer l'appel d'un script php. header('location:http://...'); -->
+
+
+<!--    CADRE CONNEXION      -->
+<?php 
+    if(isset($_SESSION['email'])){
+      echo "Bonjour, ";
+      print_r($_SESSION['email']);
+      echo'<a href="deconnexion.php"><button type="button">Déconnexion</button></a>';
+    
+    // ajouter ici bouton pour voir commande
+    }
+    else {  
+    echo 
+    '<form action="http://localhost:8888/CreationCompte.php">
+                <button type="submit"> S\'inscrire </button></form>';
+
+    echo
+    '<form action="http://localhost:8888/connexion.php">
+                <button type="submit"> Se Connecter </button></form>';       
+  }
+    ?> 
+
