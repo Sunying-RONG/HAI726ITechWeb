@@ -1,4 +1,3 @@
-
 <?php session_start();?>
 <!-- mettre des commentaire : ctrl shift / -->
 
@@ -7,11 +6,11 @@
 
 
       <head>
-            <title>Inscription</title>
+            <title>Connexion</title>
       </head>
 
       <body>
-            Inscription à l'espace membre : </br></br>
+            Se connecter : </br></br>
 
 
             <?php
@@ -41,12 +40,20 @@
             if (isset($_GET['email']) && !empty($_GET['email']) && $_GET['pass'] != "" ) { 
                   // isset verifie qu'il y a bien un champ email pour ne pas appeller cette fonction si on arrive sur cette page pour la premiere fois
                   // isempty verifie que le champ est bien rempli
-                  $add = "INSERT INTO clients VALUES ('".$_GET['email']."', '".$_GET['pass']."', '".$_GET['nom']."', '".$_GET['surnom']."', '".$_GET['ville']."', '"
-                  .$_GET['addresse']."', '".$_GET['tel']."');";
-                  // echo $add;
-                  // ^ test notre requete sql
-                  $dbh->query($add);
-                  // ajout du client dans la BDD
+
+                  $verif = "SELECT * FROM clients WHERE email='".$_GET['email']."' AND motdepasse='".$_GET['pass']."';" ; 
+                  //echo $verif;
+                  $vsth = $dbh->prepare($verif);
+                  $vsth->execute();
+                  $vresult = $vsth->fetchAll();
+                  if (count($vresult)>0) {
+                  //print_r($vresult);
+                echo "Bonjour, ";
+                $_SESSION['email'] = $_GET['email'];
+    
+                }
+                
+                 print_r($_SESSION['email']);
             }
             ?>
 
@@ -55,26 +62,17 @@
                   <input type="text" name="email" placeholder="" required/></br>
                   Mot de passe:
                   <input type="password" name="pass" placeholder="" required /></br>
-                  Nom:
-                  <input type="text" name="nom" placeholder="" required /></br> 
-                  Prenom:
-                  <input type="text" name="surnom" placeholder="" required /></br> 
-                  ville:
-                  <input type="text" name="ville" placeholder="" required /></br>
-                  addresse:
-                  <input type="text" name="addresse" placeholder="" required /></br>
-                  Telephone:
-                  <input type="text" name="tel" placeholder="" required /></br>
 
                   <input type="submit" value="validez"/>
-            </form>
+             </form>
 
-            
             <form action="http://localhost:8888/rechercheProduitsGenerique.php">
                 <button type="submit"> Retour </button>
             </form>
-            
+
       </body>
+
+
 
 
 </html>

@@ -1,4 +1,5 @@
-<html>
+
+<?php session_start();?>
   <head>
     <title> Liste des produits par catégorie et marque </title>
       <meta charset="UTF-8" />
@@ -78,11 +79,28 @@
       <input type="submit" name="submit_button" value="Ajouter dans panier">
     </form>
    
-
-    <a href="CreationCompte.php">Vous inscrire</a>
-
-    
+   
   </body>
 </html>
-<!-- echo "<li>".$enr['nom']." (".$enr['catégorie'].") : ".$enr['prix']."</li>"; -->
+
+<!--    CADRE CONNEXION      -->
+<?php 
+    if(isset($_SESSION['email'])){
+      echo "Bonjour, ";
+      print_r($_SESSION['email']);
+      echo'<a href="deconnexion.php"><button type="button">Déconnexion</button></a>';
+    
+    // ajouter ici bouton pour voir commande
+    }
+    else {  
+    echo 
+    '<form action="http://localhost:8888/CreationCompte.php">
+                <button type="submit"> S\'inscrire </button></form>';
+
+    echo
+    '<form action="http://localhost:8888/connexion.php">
+                <button type="submit"> Se Connecter </button></form>';       
+  }
+    ?> 
+
 
