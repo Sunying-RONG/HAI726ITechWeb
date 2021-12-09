@@ -1,4 +1,5 @@
-<html>
+
+<?php session_start();?>
   <head>
     <title> Liste des produits par catégorie et marque </title>
       <meta charset="UTF-8" />
@@ -10,11 +11,11 @@
       $INFOS = "";
       foreach ($_GET as $nom => $valeur) {
        if ($valeur != "") {
-           if ($WHERE == "") $WHERE .= "WHERE ";
-           else              $WHERE .= " AND ";
-           $WHERE .= "$nom='$valeur'";
-           $INFOS .= "$nom='$valeur' ";
-        }
+        if ($WHERE == "") $WHERE .= "WHERE ";
+        else              $WHERE .= " AND ";
+        $WHERE .= "$nom='$valeur'";
+        $INFOS .= "$nom='$valeur' ";
+     }
       }
       echo "<h3> Liste des produits : $INFOS </h3>";    
       $sql = "SELECT * FROM produits $WHERE;";      
@@ -78,11 +79,28 @@
       <input type="submit" name="submit_button" value="Ajouter dans panier">
     </form>
    
-
-
-
-    
+   
   </body>
 </html>
-<!-- echo "<li>".$enr['nom']." (".$enr['catégorie'].") : ".$enr['prix']."</li>"; -->
+
+<!--    CADRE CONNEXION      -->
+<?php 
+    if(isset($_SESSION['email'])){
+      echo "Bonjour, ";
+      print_r($_SESSION['email']);
+      echo'<a href="deconnexion.php"><button type="button">Déconnexion</button></a>';
+    
+    // ajouter ici bouton pour voir commande
+    }
+    else {  
+    echo 
+    '<form action="http://localhost:8888/CreationCompte.php">
+                <button type="submit"> S\'inscrire </button></form>';
+
+    echo
+    '<form action="http://localhost:8888/connexion.php">
+                <button type="submit"> Se Connecter </button></form>';       
+  }
+    ?> 
+
 
