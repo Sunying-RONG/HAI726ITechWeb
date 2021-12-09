@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS lignescommandes (
   idProduit INT, FOREIGN KEY(idProduit) REFERENCES produits(numProduit) ON DELETE CASCADE,
   quantité int(3), 
   montant float(5.2),
-  constraint lcPK (idlignecommandes, idCommande)
+  constraint lcPK primary key (idlignecommandes, idCommande)
   );
 
 

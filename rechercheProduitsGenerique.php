@@ -144,8 +144,8 @@
     <?php
       if (isset($_GET['valider'])) {
         foreach ($_GET as $selectId => $valeur) {
-            // echo $selectId.' => '.$valeur."  ";
-            $_SESSION['selection'][$selectId] = $valeur;
+          // echo $selectId.' => '.$valeur."  ";
+          $_SESSION['selection'][$selectId] = $valeur;
         }
         foreach ($_SESSION['selection'] as $selectId => $valeur) {
           echo $selectId.' => '.$valeur."  ";
@@ -154,28 +154,29 @@
       }
     ?>
 
+    <!--    CADRE CONNEXION      -->
+    <?php 
+        if(isset($_SESSION['email'])){
+          echo "Bonjour, ";
+          print_r($_SESSION['email']);
+          echo'<a href="deconnexion.php"><button type="button">Déconnexion</button></a>';
+        
+        // ajouter ici bouton pour voir commande
+        }
+        else {  
+        echo 
+        '<form action="http://localhost:8887/creationCompte.php">
+                    <button type="submit"> S\'inscrire </button></form>';
+
+        echo
+        '<form action="http://localhost:8887/connexion.php">
+                    <button type="submit"> Se Connecter </button></form>';       
+      }
+    ?>
   </body>
 </html>
 <!-- Pour forcer l'appel d'un script php. header('location:http://...'); -->
 
 
-<!--    CADRE CONNEXION      -->
-<?php 
-    if(isset($_SESSION['email'])){
-      echo "Bonjour, ";
-      print_r($_SESSION['email']);
-      echo'<a href="deconnexion.php"><button type="button">Déconnexion</button></a>';
-    
-    // ajouter ici bouton pour voir commande
-    }
-    else {  
-    echo 
-    '<form action="http://localhost:8888/CreationCompte.php">
-                <button type="submit"> S\'inscrire </button></form>';
 
-    echo
-    '<form action="http://localhost:8888/connexion.php">
-                <button type="submit"> Se Connecter </button></form>';       
-  }
-    ?> 
 
