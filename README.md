@@ -78,7 +78,19 @@ Comment mémoriser des informations sur la navigation sans être obligé de les 
 Au début de tous les scriipts php qui vont utilisé la session (càd avant <html>)
 
 - mise à disposition du tableau superglobal
-$_session['mail] = ...; 
+$_session['mail'] = ...; 
 $mail = $_session['mail']; 
+$_session = array(); // vide session
+// durée de session
 $_GET 
 $_POST
+
+dans navigateur 
+session storage
+local storage
+
+compte rendu :
+où on est, ce qui marche, ce qui bugge 
+
+php html javaScript
+

@@ -1,7 +1,8 @@
-
+<?php session_start();?> 
+<!-- crée session ou réutilisation si existe -->
 <html>
   <head>
-    <title> Liste des produits par catégorie et marque </title>
+    <title>Liste des produits par catégorie et marque</title>
       <meta charset="UTF-8" />
   </head>
   <body>
@@ -32,10 +33,14 @@
       echo "<ul>";
       foreach ($result as $enr) {
         echo "<li>".$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros</li>";
+        if (!$_SESSION['selection'][$enr['numProduit']]) {
+          $_SESSION['selection'][$enr['numProduit']] = 0;
+        }
       }
       echo "</ul>";
     ?>
-   
+    
+    <button type="" name="voir_panier"><a href="panier.php">Voir panier</a></button>
     <form action="rechercheProduitsGenerique.php" method="get">
       <p>Catégorie</p>
       <select name="catégorie" id="">
@@ -96,7 +101,7 @@
               $WHERE .= " AND ";
             }
             if ($nom == "prix_max") {
-              $WHERE .= "prix<='$valeur'";
+              $WHERE .= "prix<=$valeur";
             } else {
               $WHERE .= "$nom='$valeur'";
             }
@@ -119,12 +124,11 @@
 
     <form action="rechercheProduitsGenerique.php" method="get">
       <?php
-        
-        # Valiser was clicked
+        # Valider was clicked
         foreach ($result as $enr) {
           // echo $enr['numProduit'];
           echo '<div>';
-            echo '<input type="number" name="'.$enr['numProduit'].'" min="0">';
+            echo '<input type="number" name="'.$enr['numProduit'].'" min="0" value="'.$_SESSION['selection'][$enr['numProduit']].'">';
             echo "<p>".$enr['numProduit'].$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros </p>";
             // echo '<input type="checkbox" id="'.$enr['numProduit'].'" value="'.$enr['numProduit'].'">';
             // echo '<label for="'.$enr['numProduit'].'">'.$enr['numProduit'].$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros</label>";
@@ -137,15 +141,19 @@
         <button type="submit" name="valider">Valider</button>
       </div>
     </form>
-    <!-- if (isset($_GET['valider'])) {} -->
-      
-    
-      <!-- <p>Nombre</p>
-      <input type="number" name="nombre" min="0">
-      <br>
-    
-      <br><br>
-      <button>Aller au panier</button> -->
+
+    <?php
+      if (isset($_GET['valider'])) {
+        foreach ($_GET as $selectId => $valeur) {
+            // echo $selectId.' => '.$valeur."  ";
+            $_SESSION['selection'][$selectId] = $valeur;
+        }
+        foreach ($_SESSION['selection'] as $selectId => $valeur) {
+          echo $selectId.' => '.$valeur."  ";
+        }
+        header('location:http://localhost:8887/panier.php');
+      }
+    ?>
 
   </body>
 </html>

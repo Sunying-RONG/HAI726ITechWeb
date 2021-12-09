@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS lignescommandes (
   quantité int(3),
   montant float(5.2));
 
-  INSERT INTO lignescommandes (idlignecommandes, idCommande, idProduit, quantité, montant) VALUES
-   (1,1,2,2,999.98);
+INSERT INTO lignescommandes (idlignecommandes, idCommande, idProduit, quantité, montant) VALUES
+(1,1,2,2,999.98);
 
   
