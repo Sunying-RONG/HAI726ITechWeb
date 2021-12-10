@@ -4,6 +4,7 @@
   <head>
     <title>Liste des produits par catégorie et marque</title>
       <meta charset="UTF-8" />
+      <script type="text/javascript" src="scriptRecherche.js"></script>
   </head>
   <body>
     <?php
@@ -19,7 +20,7 @@
       // }
       // echo "<h3> Liste des produits : $INFOS </h3>";    
       $sql = "SELECT * FROM produits;"; 
-      echo $sql; /* Pour le déboguage */
+      // echo $sql; /* Pour le déboguage */
       
       $dsn = 'mysql:host=mysql.etu.umontpellier.fr;dbname=e20210011437;charset=UTF8';
       $username = 'e20210011437';
@@ -30,16 +31,35 @@
       $sth->execute();
       $result = $sth->fetchAll();
 
-      echo "<ul>";
-      foreach ($result as $enr) {
-        echo "<li>".$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros</li>";
-        if (!$_SESSION['selection'][$enr['numProduit']]) {
-          $_SESSION['selection'][$enr['numProduit']] = 0;
-        }
-      }
-      echo "</ul>";
+      // echo "<ul>";
+      // foreach ($result as $enr) {
+      //   echo "<li>".$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros</li>";
+      //   if (!$_SESSION['selection'][$enr['numProduit']]) {
+      //     $_SESSION['selection'][$enr['numProduit']] = 0;
+      //   }
+      // }
+      // echo "</ul>";
     ?>
-    
+    <!--    CADRE CONNEXION      -->
+    <?php 
+        if(isset($_SESSION['email'])){
+          echo "Bonjour, ";
+          print_r($_SESSION['email']);
+          echo'<a href="http://localhost:8888/deconnexion.php"><button type="button">Déconnexion</button></a>';
+        
+        // ajouter ici bouton pour voir commande
+        }
+        else {  
+        echo 
+        '<form action="http://localhost:8888/creationCompte.php">
+                    <button type="submit"> S\'inscrire </button></form>';
+
+        echo
+        '<form action="http://localhost:8888/connexion.php">
+                    <button type="submit"> Se Connecter </button></form>';       
+      }
+    ?>
+
     <button type="" name="voir_panier"><a href="panier.php">Voir panier</a></button>
     <form action="rechercheProduitsGenerique.php" method="get">
       <p>Catégorie</p>
@@ -81,13 +101,16 @@
       <p>Prix max</p>
       <input type="number" name="prix_max" min="1">
       <br><br>
-      <input type="submit" name="rechercher" value="Rechercher">
+      <div>
+        <button type="submit" name="rechercher" onclick="recherche()">Rechercher</button>
+      </div>
     </form>
+    
     <?php
       if (isset($_GET['rechercher'])) {
         $WHERE = "";
-        echo "<h3> Liste des produits : </h3>"; 
-        print_r($_GET);
+        // echo "<h3> Liste des produits : </h3>"; 
+        // print_r($_GET);
         foreach ($_GET as $nom => $valeur) {
           // echo $nom;
           // echo ": ";
@@ -101,14 +124,9 @@
             }
             if ($nom == "prix_max") {
               $WHERE .= "prix<=$valeur";
-            } else {
-              $WHERE .= "$nom='$valeur'";
-            }
-          }
-        }
-      
+            } else {style="display:none"
         $sql="SELECT * FROM produits $WHERE;";
-        echo $sql;
+        // echo $sql;
         $sth = $dbh->prepare($sql);
         $sth->execute();
         $result = $sth->fetchAll();
@@ -121,7 +139,8 @@
       }
     ?>
 
-    <form action="rechercheProduitsGenerique.php" method="get">
+    <form id="resultRecherche" action="rechercheProduitsGenerique.php" method="get">
+      <p>Résultat de recherche :</p>
       <?php
         # Valider was clicked
         foreach ($result as $enr) {
@@ -144,38 +163,21 @@
     <?php
       if (isset($_GET['valider'])) {
         foreach ($_GET as $selectId => $valeur) {
-            // echo $selectId.' => '.$valeur."  ";
-            $_SESSION['selection'][$selectId] = $valeur;
+          // echo $selectId.' => '.$valeur."  ";
+          $_SESSION['selection'][$selectId] = $valeur;
         }
-        foreach ($_SESSION['selection'] as $selectId => $valeur) {
-          echo $selectId.' => '.$valeur."  ";
-        }
-        header('location:http://localhost:8887/panier.php');
+        // foreach ($_SESSION['selection'] as $selectId => $valeur) {
+        //   echo $selectId.' => '.$valeur."  ";
+        // }
+        header('location:http://localhost:8888/panier.php');
       }
     ?>
 
+    
   </body>
 </html>
 <!-- Pour forcer l'appel d'un script php. header('location:http://...'); -->
 
 
-<!--    CADRE CONNEXION      -->
-<?php 
-    if(isset($_SESSION['email'])){
-      echo "Bonjour, ";
-      print_r($_SESSION['email']);
-      echo'<a href="deconnexion.php"><button type="button">Déconnexion</button></a>';
-    
-    // ajouter ici bouton pour voir commande
-    }
-    else {  
-    echo 
-    '<form action="http://localhost:8888/CreationCompte.php">
-                <button type="submit"> S\'inscrire </button></form>';
 
-    echo
-    '<form action="http://localhost:8888/connexion.php">
-                <button type="submit"> Se Connecter </button></form>';       
-  }
-    ?> 
 

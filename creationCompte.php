@@ -52,7 +52,7 @@
 
             <form method="get">
                   Email:
-                  <input type="text" name="email" placeholder="" required/></br>
+                  <input type="email" name="email" placeholder="" required/></br>
                   Mot de passe:
                   <input type="password" name="pass" placeholder="" required /></br>
                   Nom:
@@ -69,9 +69,11 @@
                   <input type="submit" value="validez"/>
             </form>
 
+            <p>Vous avez déjà un compte ? Veuillez connecter.</p>
+            <button type=""><a href="http://localhost:8888/creationCompte.php">Se Connecter</a></button>
             
             <form action="http://localhost:8888/rechercheProduitsGenerique.php">
-                <button type="submit"> Retour </button>
+                <button type="submit"> Retour à l'acceuil </button>
             </form>
             
       </body>
