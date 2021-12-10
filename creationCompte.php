@@ -8,10 +8,16 @@
 
       <head>
             <title>Inscription</title>
+            <meta charset="utf-8">
+            <link rel="stylesheet" href="style.css">
       </head>
 
       <body>
-            Inscription à l'espace membre : </br></br>
+         <header>
+            <img class="fit-picture" src="/image/title_placeholder.svg">
+         </header>
+            </br>
+
 
 
             <?php
@@ -28,12 +34,12 @@
                   $sth->execute();
                   $result = $sth->fetchAll();
 
-                   echo "<ul> LISTE COMPTE:";
-                  foreach ($result as $enr) {
-                  echo "<li> "
-                       .$enr['email']."</li>";
-                  
-                  }
+                   //echo "<ul> LISTE COMPTE:";
+                  //foreach ($result as $enr) {
+                  //echo "<li> "
+                   //    .$enr['email']."</li>";
+                  // }
+
                   echo "</ul>";
                   // ^ vérification en affichant liste des comptes
             ?>
@@ -51,31 +57,54 @@
             ?>
 
             <form method="get">
-                  Email:
-                  <input type="email" name="email" placeholder="" required/></br>
-                  Mot de passe:
-                  <input type="password" name="pass" placeholder="" required /></br>
-                  Nom:
-                  <input type="text" name="nom" placeholder="" required /></br> 
-                  Prenom:
-                  <input type="text" name="surnom" placeholder="" required /></br> 
-                  ville:
-                  <input type="text" name="ville" placeholder="" required /></br>
-                  addresse:
-                  <input type="text" name="addresse" placeholder="" required /></br>
-                  Telephone:
-                  <input type="text" name="tel" placeholder="" required /></br>
-
-                  <input type="submit" value="validez"/>
+                <center>
+                <br>
+                <fieldset>
+                <h2> Inscription </h2>
+               
+                  <p>Email: <br>
+                     <input type="email" name="email" placeholder="" required/><br>
+                  </p>
+                  <p>Mot de passe:<br>
+                     <input type="password" name="pass" placeholder="" required /><br>
+                  </p>
+                  <p>Nom:<br>
+                     <input type="text" name="nom" placeholder="" required /><br> 
+                  </p>
+                  <p>Prenom:<br>
+                     <input type="text" name="surnom" placeholder="" required /><br>
+                  </p> 
+                  <p>ville:<br>
+                     <input type="text" name="ville" placeholder="" required /><br>
+                  </p>
+                  <p>addresse:<br>
+                     <input type="text" name="addresse" placeholder="" required /><br>
+                  </p>
+                  <p>Telephone:<br>
+                     <input type="text" name="tel" placeholder="" required /><br>
+                  </p>
+                  <p>
+                     <input type="submit" value="validez"/>
+                  </p>
+                </fieldset>
+                </center>
             </form>
 
-            <p>Vous avez déjà un compte ? Veuillez connecter.</p>
-            <button type=""><a href="http://localhost:8888/creationCompte.php">Se Connecter</a></button>
             
-            <form action="http://localhost:8888/rechercheProduitsGenerique.php">
-                <button type="submit"> Retour à l'acceuil </button>
-            </form>
-            
+         <div class="container">
+         <div class="left">
+            <p> Vous avez déjà un compte ? </p>
+            <button type="" name="se_connecter"><a href="connexion.php">Se connecter</a></button>
+         </div>
+         <div class="right">
+    
+                <p></p>
+                <form action="http://localhost:8887/rechercheProduitsGenerique.php">
+                  <button type="submit"> Retour </button>
+                </form>
+         </div>
+         </div>
+         
       </body>
 
 

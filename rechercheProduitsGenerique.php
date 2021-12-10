@@ -3,9 +3,13 @@
 <html>
   <head>
     <title>Liste des produits par catégorie et marque</title>
-      <meta charset="UTF-8" />
-      <script type="text/javascript" src="scriptRecherche.js"></script>
+
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="scriptRecherche.js"></script>
+
   </head>
+
   <body>
     <?php
       // $WHERE = "";
@@ -177,7 +181,5 @@
   </body>
 </html>
 <!-- Pour forcer l'appel d'un script php. header('location:http://...'); -->
-
-
 
 
