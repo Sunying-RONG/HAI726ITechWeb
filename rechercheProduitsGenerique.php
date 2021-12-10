@@ -3,8 +3,10 @@
 <html>
   <head>
     <title>Liste des produits par catégorie et marque</title>
-      <meta charset="UTF-8" />
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
   </head>
+
   <body>
     <?php
       // $WHERE = "";
@@ -170,11 +172,11 @@
     }
     else {  
     echo 
-    '<form action="http://localhost:8888/CreationCompte.php">
+    '<form action="http://localhost:8887/creationCompte.php">
                 <button type="submit"> S\'inscrire </button></form>';
 
     echo
-    '<form action="http://localhost:8888/connexion.php">
+    '<form action="http://localhost:8887/connexion.php">
                 <button type="submit"> Se Connecter </button></form>';       
   }
     ?> 

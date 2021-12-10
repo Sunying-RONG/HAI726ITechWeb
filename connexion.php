@@ -7,10 +7,12 @@
 
       <head>
             <title>Connexion</title>
+            <meta charset="utf-8">
+            <link rel="stylesheet" href="style.css">
       </head>
 
       <body>
-            Se connecter : </br></br>
+           <h1> Se connecter : </h1></br></br>
 
 
             <?php
@@ -27,13 +29,13 @@
                   $sth->execute();
                   $result = $sth->fetchAll();
 
-                   echo "<ul> LISTE COMPTE:";
-                  foreach ($result as $enr) {
-                  echo "<li> "
-                       .$enr['email']."</li>";
+                   //echo "<ul> LISTE COMPTE:";
+                  //foreach ($result as $enr) {
+                  //echo "<li> "
+                       //.$enr['email']."</li>";
                   
-                  }
-                  echo "</ul>";
+                  //}
+                  //echo "</ul>";
                   // ^ vérification en affichant liste des comptes
             ?>
             <?php
@@ -56,17 +58,18 @@
                  print_r($_SESSION['email']);
             }
             ?>
-
+             
             <form method="get">
-                  Email:
-                  <input type="text" name="email" placeholder="" required/></br>
-                  Mot de passe:
+                 <p>  Email:
+                  <input type="text" name="email" placeholder="" required/>
+                 </p>
+                 <p>  Mot de passe:
                   <input type="password" name="pass" placeholder="" required /></br>
-
+                 </p>
                   <input type="submit" value="validez"/>
              </form>
-
-            <form action="http://localhost:8888/rechercheProduitsGenerique.php">
+            <p> </p>
+            <form action="http://localhost:8887/rechercheProduitsGenerique.php">
                 <button type="submit"> Retour </button>
             </form>
 
