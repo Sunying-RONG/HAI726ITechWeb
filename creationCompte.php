@@ -19,6 +19,7 @@
             </br>
 
 
+
             <?php
             $sql = "SELECT * FROM clients";      
                   
@@ -38,6 +39,7 @@
                   //echo "<li> "
                    //    .$enr['email']."</li>";
                   // }
+
                   echo "</ul>";
                   // ^ vérification en affichant liste des comptes
             ?>
@@ -61,7 +63,7 @@
                 <h2> Inscription </h2>
                
                   <p>Email: <br>
-                     <input type="text" name="email" placeholder="" required/><br>
+                     <input type="email" name="email" placeholder="" required/><br>
                   </p>
                   <p>Mot de passe:<br>
                      <input type="password" name="pass" placeholder="" required /><br>
@@ -103,7 +105,6 @@
          </div>
          </div>
          
-        
       </body>
 
 
