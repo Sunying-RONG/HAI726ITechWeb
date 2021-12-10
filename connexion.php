@@ -55,14 +55,14 @@
                         print_r($_SESSION['email']);
                         // depuis commande à connexion, revenir à commande
                         if ($_SESSION['idCommande'] && $_SESSION['calendrier']) {
-                              header('location:http://localhost:8887/panier.php');
+                              header('location:http://localhost:8888/panier.php');
                         }
                   }
             ?>
 
             <form method="get">
                   Email:
-                  <input type="text" name="email" placeholder="" required/></br>
+                  <input type="email" name="email" placeholder="" required/></br>
                   Mot de passe:
                   <input type="password" name="pass" placeholder="" required /></br>
 
@@ -70,9 +70,9 @@
             </form>
 
             <p>Vous n'avez pas de compte ? Veuillez s'inscrire.</p>
-            <button type=""><a href="http://localhost:8887/creationCompte.php">S'inscrire</a></button>
+            <button type=""><a href="http://localhost:8888/creationCompte.php">S'inscrire</a></button>
 
-            <form action="http://localhost:8887/rechercheProduitsGenerique.php">
+            <form action="http://localhost:8888/rechercheProduitsGenerique.php">
                 <button type="submit"> Retour à l'acceuil </button>
             </form>
 

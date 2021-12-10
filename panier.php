@@ -3,6 +3,7 @@
     foreach ($_SESSION['selection'] as $selectId => $valeur) {
         echo $selectId.' => '.$valeur."  ";
     }
+    $email = $_SESSION['email'];
 ?>
 <html>
     <head>
@@ -21,9 +22,17 @@
             $sth = $dbh->prepare($sql);
             $sth->execute();
             $result = $sth->fetchAll();
+            echo "<div>Utilisateur : ".$email."</div>";
         ?>
+        
         <form action="panier.php" method="get">
             <?php
+                if (isset($_GET['commander'])) {
+                    foreach ($_GET as $selectId => $valeur) {
+                        // echo $selectId.' => '.$valeur."  ";
+                        $_SESSION['selection'][$selectId] = $valeur;
+                    }
+                }
                 foreach ($result as $enr) {
                     if ($_SESSION['selection'][$enr['numProduit']] > 0) {
                         echo '<div>';
@@ -44,26 +53,29 @@
                     // echo $selectId.' => '.$valeur."  ";
                     $_SESSION['selection'][$selectId] = $valeur;
                 }
-                foreach ($_SESSION['selection'] as $selectId => $valeur) {
-                    echo $selectId.' => '.$valeur."  ";
-                }
-                // commandes (idCommande, calendrier, email)
-                $nbCommandeSql = "SELECT COUNT(*) FROM commandes;";
-                $nbCommandeSql = $dbh->prepare($sql);
-                $nbCommandeSql->execute();
-                $nbCommande = $nbCommandeSql->fetchAll();
-                $idCommande = $nbCommande+1;
-                echo $idCommande;
+                // foreach ($_SESSION['selection'] as $selectId => $valeur) {
+                //     echo $selectId.' => '.$valeur."  ";
+                // }
+                $nbCommandeSql = "SELECT COUNT(*) as nb FROM commandes;";
+                $sth4 = $dbh->prepare($nbCommandeSql);
+                $sth4->execute();
+                $nbCommande = $sth4->fetchAll();
+                // print_r($nbCommande);
+                // echo "<br>";
+                // echo $nbCommande[0]['nb'];
+                $idCommande = $nbCommande[0]['nb'] + 1;
+                // echo "<br>";
+                // echo $idCommande;
+                // echo "<br>";
                 $_SESSION['idCommande'] = $idCommande;
 
                 $today = date("Ymd");
-                echo $today;
                 $_SESSION['calendrier'] = $today;
-               
-                $email = $_SESSION['email'];
+                
                 if ($email) {
                     // créer une nouvelle commande
-                    $newCommande = "INSERT INTO commandes VALUES (".$idCommande.",".$today.",".$email.");";
+                    $newCommande = "INSERT INTO commandes VALUES (".$idCommande.",".$today.",'".$email."');";
+                    // echo $newCommande;
                     $dbh->query($newCommande);
                     // créer les nouvelle lignes de commande
                     $idLC = 0;
@@ -78,28 +90,38 @@
                     }
                     // afficher les détails de commande et ligne de commande
                     echo "Commander avec succès !";
+                    echo "<br>";
                     echo "Voici les détails de votre commande : ";
+                    echo "<br>";
                     echo "Utilisateur : ".$email;
+                    echo "<br>";
                     echo "Date de commande : ".$today;
+                    echo "<br>";
                     echo "Référence de commande : ".$idCommande;
+                    echo "<br>";
                     $ligneCommandeSql = "SELECT * FROM lignescommandes WHERE idCommande = ".$idCommande.";";
                     $sth2 = $dbh->prepare($ligneCommandeSql);
                     $sth2->execute();
                     $ligneCommande = $sth2->fetchAll();
                     $montantTotal = 0;
                     foreach ($ligneCommande as $lc) {
-                        $nomProduitSql = "SELECT nom FROM produits WHERE numProduit = ".$lc['idProduit'].";";
-                        $sth3 = $dbh->prepare($nomProduitSql);
+                        $produitSql = "SELECT * FROM produits WHERE numProduit = ".$lc['idProduit'].";";
+                        // echo $produitSql;
+                        $sth3 = $dbh->prepare($produitSql);
                         $sth3->execute();
-                        $nomProduit = $sth3->fetchAll();
-                        echo "Nom produit : ".$nomProduit.", Quantité : ".$lc['quantité'].", Montant : ".$lc['montant'].".";
+                        $produit = $sth3->fetchAll();
+                        echo "Nom produit : ".$produit[0]['nom'].", Quantité : ".$lc['quantité'].", Montant : ".$lc['montant'].".";
+                        echo "<br>";
                         $montantTotal += $lc['montant'];
                     }
                     echo "Montant Total : ".$montantTotal;
                     unset($_SESSION['idCommande']);
                     unset($_SESSION['calendrier']);
+                    foreach ($result as $enr) {
+                        $_SESSION['selection'][$enr['numProduit']] = 0;
+                    }
                 } else {
-                    header('location:http://localhost:8887/connexion.php');
+                    header('location:http://localhost:8888/connexion.php');
                 }
             }
         ?>

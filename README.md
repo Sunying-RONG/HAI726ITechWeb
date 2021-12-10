@@ -27,7 +27,7 @@ database centrale, php peut etre local
 pdo  
 
 Lancer php server dans le dossier where se trouve le code de php. 
-php -S localhost:8887  
+php -S localhost:8888  
 
 selection de produits --> produits  
 connexion et creation de compte --> clients  
@@ -43,7 +43,7 @@ mots clefs
 synchro  
 js  
 
-localhost:8887/rechercheProduitsGenerique.php
+localhost:8888/rechercheProduitsGenerique.php
 
 if a server already execute
 `>ps -edf`
