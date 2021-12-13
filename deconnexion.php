@@ -16,7 +16,7 @@ $_SESSION=array();?>
       <script type="text/javascript">
         (function(){
           setTimeout(function(){
-          window.location="http://localhost:8887/rechercheProduitsGenerique.php?/";
+          window.location="http://localhost:8888/rechercheProduitsGenerique.php?/";
          },3000); /* 1000 = 1 second*/
         })();
       </script>
