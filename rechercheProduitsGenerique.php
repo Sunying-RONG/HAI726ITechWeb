@@ -1,4 +1,5 @@
-<?php session_start();?> 
+<?php session_start();
+?> 
 <!-- crée session ou réutilisation si existe -->
 <html>
   <head>
@@ -6,7 +7,6 @@
 
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
-    <script type="text/javascript" src="scriptRecherche.js"></script>
 
   </head>
 
@@ -67,7 +67,7 @@
     <button type="" name="voir_panier"><a href="panier.php">Voir panier</a></button>
     <form action="rechercheProduitsGenerique.php" method="get">
       <p>Catégorie</p>
-      <select name="catégorie" id="">
+      <select name="catégorie" id="categorie" onchange="OnSelectionChange()">
         <option value=''>Tous</option>
         <?php
           $sql="SELECT distinct catégorie FROM produits;";
@@ -79,7 +79,7 @@
       </select>
       <br>
       <p>Marque</p>
-      <select name="marque" id="">
+      <select name="marque" id="marque" onchange="OnSelectionChange()">
         <option value=''>Tous</option>
         <?php
           $sql="SELECT distinct marque FROM produits;";
@@ -91,7 +91,7 @@
       </select>
       <br>
       <p>Nom</p>
-      <select name="nom" id="">
+      <select name="nom" id="nom" onchange="OnSelectionChange()">
         <option value=''>Tous</option>
         <?php
           $sql="SELECT distinct nom FROM produits;";
@@ -106,10 +106,37 @@
       <input type="number" name="prix_max" min="1">
       <br><br>
       <div>
-        <button type="submit" name="rechercher" onclick="recherche()">Rechercher</button>
+        <button type="submit" name="rechercher">Rechercher</button>
       </div>
     </form>
-    
+    <script>
+        let categorieChoisi;
+        let marqueChoisi;
+        let nomChoisi;
+        function OnSelectionChange() {
+          categorieChoisi = document.getElementById('categorie').value;
+          console.log(categorieChoisi);
+          marqueChoisi = document.getElementById('marque').value;
+          console.log(marqueChoisi);
+          nomChoisi = document.getElementById('nom').value;
+          console.log(nomChoisi);
+        }
+        // document.getElementById("categorie").onchange = changeCategorie;
+        // function changeCategorie(){
+        //    php echo global $categorieChoisi;= this.value;
+        //    console.log("##categorieChoisi",this.value);
+        // }
+        // document.getElementById("marque").onchange = changeMarque;
+        // function changeMarque(){
+        //    $_SESSION["marqueChoisi"]= this.value;
+        //    console.log("marque",this.value);
+        // }
+        // document.getElementById("nom").onchange = changeNom;
+        // function changeNom(){
+        //    $_SESSION["nomChoisi"]= this.value;
+        //    console.log("nom",this.value);
+        // }
+    </script>
     <?php
       if (isset($_GET['rechercher'])) {
         $WHERE = "";
@@ -128,7 +155,11 @@
             }
             if ($nom == "prix_max") {
               $WHERE .= "prix<=$valeur";
-            } else {style="display:none"
+            } else {
+              $WHERE .= "$nom='$valeur'";
+            }
+          }
+        }
         $sql="SELECT * FROM produits $WHERE;";
         // echo $sql;
         $sth = $dbh->prepare($sql);
@@ -140,29 +171,26 @@
         //   echo "<li>".$enr['numProduit'].$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros</li>";
         // }
         // echo "</ul>";
+        echo '<form action="rechercheProduitsGenerique.php" method="get">';
+          echo '<p>Résultat de la recherche :</p>';
+          # Valider was clicked
+          foreach ($result as $enr) {
+            // echo $enr['numProduit'];
+            echo '<div>';
+              echo '<input type="number" name="'.$enr['numProduit'].'" min="0" value="'.$_SESSION['selection'][$enr['numProduit']].'">';
+              echo "<p>".$enr['numProduit'].$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros </p>";
+              // echo '<input type="checkbox" id="'.$enr['numProduit'].'" value="'.$enr['numProduit'].'">';
+              // echo '<label for="'.$enr['numProduit'].'">'.$enr['numProduit'].$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros</label>";
+            echo '</div>';
+          }
+          // print_r($_GET);
+          echo '<br>';
+          echo '<div>';
+            echo '<button type="submit" name="valider">Valider</button>';
+          echo '</div>';
+        echo '</form>';
       }
     ?>
-
-    <form id="resultRecherche" action="rechercheProduitsGenerique.php" method="get">
-      <p>Résultat de recherche :</p>
-      <?php
-        # Valider was clicked
-        foreach ($result as $enr) {
-          // echo $enr['numProduit'];
-          echo '<div>';
-            echo '<input type="number" name="'.$enr['numProduit'].'" min="0" value="'.$_SESSION['selection'][$enr['numProduit']].'">';
-            echo "<p>".$enr['numProduit'].$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros </p>";
-            // echo '<input type="checkbox" id="'.$enr['numProduit'].'" value="'.$enr['numProduit'].'">';
-            // echo '<label for="'.$enr['numProduit'].'">'.$enr['numProduit'].$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros</label>";
-          echo '</div>';
-        }
-        // print_r($_GET);
-      ?>
-      <br>
-      <div>
-        <button type="submit" name="valider">Valider</button>
-      </div>
-    </form>
 
     <?php
       if (isset($_GET['valider'])) {
@@ -177,9 +205,6 @@
       }
     ?>
 
-    
+    <!-- <script type="text/javascript" src="scriptRecherche.js"></script> -->
   </body>
 </html>
-<!-- Pour forcer l'appel d'un script php. header('location:http://...'); -->
-
-

@@ -1,8 +1,7 @@
 <?php session_start();
-    // $items = unserialize($_session['selection']);
-    foreach ($_SESSION['selection'] as $selectId => $valeur) {
-        echo $selectId.' => '.$valeur."  ";
-    }
+    // foreach ($_SESSION['selection'] as $selectId => $valeur) {
+    //     echo $selectId.' => '.$valeur."  ";
+    // }
     $email = $_SESSION['email'];
 ?>
 <html>
