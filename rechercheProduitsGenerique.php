@@ -2,13 +2,14 @@
 ?> 
 <!-- crée session ou réutilisation si existe -->
 <html>
+
+
   <head>
     <title>Liste des produits par catégorie et marque</title>
-
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
-
   </head>
+
 
   <body>
     <?php
@@ -301,23 +302,21 @@
     <!--    CADRE CONNEXION      -->
     <?php 
         if(isset($_SESSION['email'])){
-          echo "Bonjour, ";
+          echo "Bonjour, <br>";
           print_r($_SESSION['email']);
+          echo "<br><br>";
           echo'<a href="http://localhost:8888/deconnexion.php"><button type="button">Déconnexion</button></a>';
-        
-        // ajouter ici bouton pour voir commande
+          echo"<br><br>";
+          echo'<a href="http://localhost:8888/commandes.php"><button type="button">Historique</button></a>';
+          echo"<br><br>";
         }
         else {  
-        echo 
-        '<form action="http://localhost:8888/creationCompte.php">
-                    <button type="submit"> S\'inscrire </button></form>';
-
-        echo
-        '<form action="http://localhost:8888/connexion.php">
-                    <button type="submit"> Se Connecter </button></form>';       
-      }
-    ?>
-
+          echo 
+          '<form action="http://localhost:8888/creationCompte.php"><button type="submit"> S\'inscrire </button></form>';
+          echo
+          '<form action="http://localhost:8888/connexion.php"><button type="submit"> Se Connecter </button></form>';       
+        }
+      ?>
     <button type="" name="voir_panier"><a href="panier.php">Voir panier</a></button>
     <form action="rechercheProduitsGenerique.php" method="get">
       <p>Catégorie</p>

@@ -1,41 +1,54 @@
 
 
+
 html{
-    font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;  
 }
 
-  a {
-    color:black ;
-    text-decoration:none ;
+a {
+  color:black ;
+  text-decoration:none ;
 }
 
 body {
-    background-image: url(image/bg_placeholder.png);
-    
-
-}
-
-h2 {
-  position:relative;
-  bottom: 40px;
-  background-color: rgb(102, 102, 102);
-  width: 30%;
-
-  
+  background-image: url(image/background.png);
 }
 
 fieldset {
-    
-    background-color: #e7e6e4 ;
-    border: none;
-    width: 50%;
+  text-align:center;
+  margin-top:50px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #eceaea ;
+  border: none;
+  width: 50%;
+}
+
+
+
+header{
+  background-color: #3b3b3b;
+  
+}
+
+.justifier{
+  text-align: justify;
+}
+
+.menu{
+  position:absolute;
+  margin-top:none;
+  object-position: right;
+  width: 15%;
+  display:inline-table;
+  background-color:#a2a2a2;
+  text-align: center;
+  height: 100%;
 }
 
 .fit-picture {
-  object-position: center ;
-  width: 100%;
-  height: 200px;
-
+ background-color: #3b3b3b;
+  text-align: center;
 }
 
 
@@ -43,19 +56,10 @@ fieldset {
   display:flex;
   flex-direction: row;
   justify-content: space-between;
-  
-
-
 }
 
 
 
-.right{
-  
-    align-self:flex-end;
+.left{
+  align-self:flex-start;
 }
-
-/* #resultRecherche{
-    display: none;
-}
- */
