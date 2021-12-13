@@ -94,7 +94,7 @@
     
                 <p></p>
                 <form action="http://localhost:8888/rechercheProduitsGenerique.php">
-                  <button type="submit"> Retour à l'acceuil</button>
+                <button type="submit"> Retour à l'acceuil</button>
                 </form>
             </div>
          </div>
