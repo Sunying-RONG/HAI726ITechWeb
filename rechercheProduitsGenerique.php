@@ -99,7 +99,6 @@
               let marqueUpdate;
               let nomUpdate;
               // The request has been completed successfully
-              console.log("-----");
               console.log("responseText : ",xhr.responseText);
               var data = JSON.parse(xhr.responseText);
               // var data = xhr.responseText;
@@ -116,7 +115,7 @@
               categorieOptions = [];
               categorieOptions.push(
                 {
-                  text: 'tous',
+                  text: '--',
                   value: ''
                 }
               );
@@ -149,7 +148,7 @@
               marqueOptions = [];
               marqueOptions.push(
                 {
-                  text: 'tous',
+                  text: '--',
                   value: ''
                 }
               );
@@ -183,7 +182,7 @@
               nomOptions = [];
               nomOptions.push(
                 {
-                  text: 'tous',
+                  text: '--',
                   value: ''
                 }
               );
@@ -231,7 +230,7 @@
       var categorieOptions = new Array();
       categorieOptions.push(
         {
-          text: 'tous',
+          text: '--',
           value: ''
         }
       );
@@ -254,7 +253,7 @@
       var marqueOptions = new Array();
       marqueOptions.push(
         {
-          text: 'tous',
+          text: '--',
           value: ''
         }
       );
@@ -277,7 +276,7 @@
       var nomOptions = new Array();
       nomOptions.push(
         {
-          text: 'tous',
+          text: '--',
           value: ''
         }
       );
@@ -295,7 +294,24 @@
         document.getElementById('categorie').options[0].selected = true;
         document.getElementById('marque').options[0].selected = true;
         document.getElementById('nom').options[0].selected = true;
-        OnSelectionChange();
+        const xhr = new XMLHttpRequest(),
+          method = "GET",
+          url = "http://localhost:8888/rechercheProduitsGenerique.php";
+        console.log(url);
+        xhr.open(method, url, true);
+        xhr.onreadystatechange = function () {
+          // In local files, status is 0 upon success in Mozilla Firefox
+          if(xhr.readyState === XMLHttpRequest.DONE) {
+            var status = xhr.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+              console.log("initialiser succes")
+            } else {
+              console.log("initialiser error");
+              // Oh no! There has been an error with the request!
+            }
+          }
+        };
+        xhr.send();
       }
 
     </script>
@@ -364,24 +380,7 @@
         <button type="submit" name="rechercher">Rechercher</button>
       </div>
     </form>
-    <script>
-        
-        // document.getElementById("categorie").onchange = changeCategorie;
-        // function changeCategorie(){
-        //    php echo global $categorieChoisi;= this.value;
-        //    console.log("##categorieChoisi",this.value);
-        // }
-        // document.getElementById("marque").onchange = changeMarque;
-        // function changeMarque(){
-        //    $_SESSION["marqueChoisi"]= this.value;
-        //    console.log("marque",this.value);
-        // }
-        // document.getElementById("nom").onchange = changeNom;
-        // function changeNom(){
-        //    $_SESSION["nomChoisi"]= this.value;
-        //    console.log("nom",this.value);
-        // }
-    </script>
+   
     <?php
       if (isset($_GET['rechercher'])) {
         $WHERE = "";
@@ -437,7 +436,7 @@
       }
     ?>
 
-    <?php
+    <?php    
       if (isset($_GET['valider'])) {
         foreach ($_GET as $selectId => $valeur) {
           // echo $selectId.' => '.$valeur."  ";
@@ -446,10 +445,10 @@
         // foreach ($_SESSION['selection'] as $selectId => $valeur) {
         //   echo $selectId.' => '.$valeur."  ";
         // }
-        header('location:http://localhost:8888/panier.php');
+        echo "<script>window.location.href='panier.php';</script>";
+        exit;
       }
+      
     ?>
-
-    <!-- <script type="text/javascript" src="scriptRecherche.js"></script> -->
   </body>
 </html>
