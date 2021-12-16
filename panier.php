@@ -129,7 +129,7 @@
                             $_SESSION['selection'][$enr['numProduit']] = 0;
                         }
                     } else {
-                        header('location:http://localhost:8888/connexion.php');
+                        header('location:http://localhost:8887/connexion.php');
                     }
                 }
             ?>

@@ -12,6 +12,9 @@
 
 
   <body>
+    <header>
+         <div class="fit-picture"><img src="/image/web_logo.png" height="200px"/></div>
+    </header>
     <?php
       // $WHERE = "";
       // $INFOS = "";
@@ -71,6 +74,7 @@
         array_push($tousNom, $enr['nom']);
       }
     ?>
+    
     <script>
       let categorieChoisi;
       let marqueChoisi;
@@ -86,7 +90,7 @@
 
         const xhr = new XMLHttpRequest(),
           method = "GET",
-          url = "http://localhost:8888/dynamique.php";
+          url = "http://localhost:8887/dynamique.php";
         let url2 = url+"?c="+categorieChoisi+"&m="+marqueChoisi+"&n="+nomChoisi;
         console.log(url2);
         xhr.open(method, url2, true);
@@ -299,25 +303,33 @@
       }
 
     </script>
+    <div class=menu>
+      <br>
+      <img src="/image/menu.png" height=35px/>
+      <br><br>
     <!--    CADRE CONNEXION      -->
     <?php 
         if(isset($_SESSION['email'])){
           echo "Bonjour, <br>";
           print_r($_SESSION['email']);
           echo "<br><br>";
-          echo'<a href="http://localhost:8888/deconnexion.php"><button type="button">Déconnexion</button></a>';
+          echo'<a href="http://localhost:8887/deconnexion.php"><button type="button">Déconnexion</button></a>';
           echo"<br><br>";
-          echo'<a href="http://localhost:8888/commandes.php"><button type="button">Historique</button></a>';
+          echo'<a href="http://localhost:8887/commandes.php"><button type="button">Historique</button></a>';
           echo"<br><br>";
         }
         else {  
           echo 
-          '<form action="http://localhost:8888/creationCompte.php"><button type="submit"> S\'inscrire </button></form>';
+          '<form action="http://localhost:8887/creationCompte.php"><button type="submit"> S\'inscrire </button></form>';
           echo
-          '<form action="http://localhost:8888/connexion.php"><button type="submit"> Se Connecter </button></form>';       
+          '<form action="http://localhost:8887/connexion.php"><button type="submit"> Se Connecter </button></form>';       
         }
       ?>
     <button type="" name="voir_panier"><a href="panier.php">Voir panier</a></button>
+    </div>
+
+    <fieldset>
+      <img src="/image/recherche.png" height=35px/>
     <form action="rechercheProduitsGenerique.php" method="get">
       <p>Catégorie</p>
       <select name="catégorie" id="categorie" onchange="OnSelectionChange()">
@@ -329,6 +341,7 @@
             new Option(option.text, option.value)
           )
         );
+        
       </script>
       <br>
       <p>Marque</p>
@@ -382,6 +395,9 @@
         //    console.log("nom",this.value);
         // }
     </script>
+    </fieldset>
+    <fieldset>
+      <img src="/image/resultats.png" height=35px/>
     <?php
       if (isset($_GET['rechercher'])) {
         $WHERE = "";
@@ -417,7 +433,7 @@
         // }
         // echo "</ul>";
         echo '<form action="rechercheProduitsGenerique.php" method="get">';
-          echo '<p>Résultat de la recherche :</p>';
+          echo '<p>Veuillez entrer les Quantités ci-dessous<p>';
           # Valider was clicked
           foreach ($result as $enr) {
             // echo $enr['numProduit'];
@@ -446,10 +462,10 @@
         // foreach ($_SESSION['selection'] as $selectId => $valeur) {
         //   echo $selectId.' => '.$valeur."  ";
         // }
-        header('location:http://localhost:8888/panier.php');
+        header('location:http://localhost:8887/panier.php');
       }
     ?>
-
+    </fieldset>
     <!-- <script type="text/javascript" src="scriptRecherche.js"></script> -->
   </body>
 </html>
