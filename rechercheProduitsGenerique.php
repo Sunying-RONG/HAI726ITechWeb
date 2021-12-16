@@ -88,7 +88,7 @@
 
         const xhr = new XMLHttpRequest(),
           method = "GET",
-          url = "http://localhost:8888/dynamique.php";
+          url = "dynamique.php";
         let url2 = url+"?c="+categorieChoisi+"&m="+marqueChoisi+"&n="+nomChoisi;
         console.log(url2);
         xhr.open(method, url2, true);
@@ -299,7 +299,7 @@
         document.getElementById('nom').options[0].selected = true;
         const xhr = new XMLHttpRequest(),
           method = "GET",
-          url = "http://localhost:8888/rechercheProduitsGenerique.php";
+          url = "rechercheProduitsGenerique.php";
         console.log(url);
         xhr.open(method, url, true);
         xhr.onreadystatechange = function () {
