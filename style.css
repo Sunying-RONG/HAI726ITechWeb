@@ -6,8 +6,47 @@ html{
 }
 
 a {
-  color:black ;
-  text-decoration:none ;
+  color:black;
+  text-decoration:none;
+}
+
+button {
+  width: 120px;
+}
+
+select {
+  width: 150px;
+}
+
+.input_prix {
+  width: 150px;
+}
+
+input {
+  width: 50px;
+}
+
+.critere {
+  display: inline-block;
+}
+
+p.critere {
+  width: 120px;
+  text-align: left;
+}
+
+.oneline_res {
+  display: inline-block;
+  padding-left: 10px;
+}
+
+.align_left {
+  text-align: left;
+  margin-left: 50px;
+}
+
+.reinitialiser {
+  width: 200px;
 }
 
 body {
@@ -24,8 +63,6 @@ fieldset {
   width: 50%;
 }
 
-
-
 header{
   background-color: #3b3b3b;
   
@@ -39,9 +76,19 @@ header{
   position:absolute;
   margin-top:none;
   object-position: right;
-  width: 15%;
+  width: 18%;
   display:inline-table;
   background-color:#a2a2a2;
+  text-align: center;
+  height: 100%;
+}
+
+.menu2{
+  position:absolute;
+  margin: top 20px;;
+  object-position: right;
+  width: 18%;
+  display:inline-table;
   text-align: center;
   height: 100%;
 }
@@ -57,8 +104,6 @@ header{
   flex-direction: row;
   justify-content: space-between;
 }
-
-
 
 .left{
   align-self:flex-start;

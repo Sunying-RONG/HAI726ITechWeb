@@ -13,6 +13,13 @@
             <header>
                   <div class="fit-picture"><img src="/image/web_logo.png" height="200px"/></div>
             </header>
+            <div class="menu2">
+                  <p>Vous n'avez pas de compte ? Veuillez vous inscrire.</p>
+                  <button type=""><a href="creationCompte.php">S'inscrire</a></button>
+                  <br><br>
+                  <button type=""><a href="rechercheProduitsGenerique.php">Retour à l'acceuil</a></button>
+            </div>
+            
 
             </br>
             <fieldset>
@@ -63,26 +70,14 @@
                   ?>
              
                   <form method="get">
-                        Email:
-                        <input type="email" name="email" placeholder="" required/></br>
-                        <br>
-                        Mot de passe:
-                        <input type="password" name="pass" placeholder="" required /></br>
-                        <input type="submit" value="validez"/>
-
-            </form>
+                        <p class="critere">Email:</p>
+                        <input class="critere input_prix" type="email" name="email" placeholder="" required/></br>
+                        <p class="critere">Mot de passe:</p>
+                        <input class="critere input_prix" type="password" name="pass" placeholder="" required /></br>
+                        <button type="submit" name="">validez</button>
+                  </form>
             </fieldset>
-            <p>Vous n'avez pas de compte ? Veuillez vous inscrire.</p>
-            <button type=""><a href="http://localhost:8888/creationCompte.php">S'inscrire</a></button>
-<br><br>
-            <form action="http://localhost:8888/rechercheProduitsGenerique.php">
-                <button type="submit"> Retour à l'acceuil </button>
-
-            </form>
-
+            
       </body>
-
-
-
 
 </html>

@@ -13,7 +13,11 @@
             <header>
                   <div class="fit-picture"><img src="/image/web_logo.png" height="200px"/></div>
             </header>
-
+            <div class="container">
+                  <div class="left">
+                        <button type=""><a href="rechercheProduitsGenerique.php">Retour à l'acceuil</a></button>
+                  </div>
+            </div>
             </br>
             <fieldset>
                   <img src="/image/commandes.png" height=35px/></br></br>
@@ -28,8 +32,6 @@
                         $sth = $dbh->prepare($sql);
                         $sth->execute();
                         $result = $sth->fetchAll();
-
-
                   ?>
                   <?php 
                         if(isset($_SESSION['email'])){
@@ -40,7 +42,6 @@
                              $sth = $dbh->prepare($com);
                              $sth->execute();
                              $result = $sth->fetchAll();
-
 
                             echo "<ul> LISTE COMMANDES:<br>";
                               foreach ($result as $enr) {
@@ -60,14 +61,7 @@
        
                  ?>
             </fieldset>
-            <div class="container">
-            <div class="left">
-                
-                <form action="http://localhost:8888/rechercheProduitsGenerique.php">
-                  <button type="submit"> Retour à l'acceuil</button>
-                </form>
-            </div>
-         </div>
+            
 
       </body>
 

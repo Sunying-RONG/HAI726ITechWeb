@@ -3,13 +3,11 @@
 <!-- crée session ou réutilisation si existe -->
 <html>
 
-
   <head>
     <title>Liste des produits par catégorie et marque</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
   </head>
-
 
   <body>
     <header>
@@ -318,155 +316,156 @@
         };
         xhr.send();
       }
-
     </script>
-    <div class=menu>
+
+    <div class="menu">
       <br>
       <img src="/image/menu.png" height=35px/>
       <br><br>
-    <!--    CADRE CONNEXION      -->
-    <?php 
+      <!--    CADRE CONNEXION      -->
+      <?php 
         if(isset($_SESSION['email'])){
           echo "Bonjour, <br>";
           print_r($_SESSION['email']);
           echo "<br><br>";
-          echo'<a href="http://localhost:8888/deconnexion.php"><button type="button">Déconnexion</button></a>';
+          echo'<button type="button"><a href="deconnexion.php">Déconnexion</a></button>';
           echo"<br><br>";
-          echo'<a href="http://localhost:8888/commandes.php"><button type="button">Historique</button></a>';
+          echo'<button type="button"><a href="commandes.php">Historique</a></button>';
           echo"<br><br>";
         }
         else {  
           echo 
-          '<form action="http://localhost:8888/creationCompte.php"><button type="submit"> S\'inscrire </button></form>';
+          '<button type="submit"><a href="creationCompte.php"> S\'inscrire </a></button>';
+          echo"<br><br>";
           echo
-          '<form action="http://localhost:8888/connexion.php"><button type="submit"> Se Connecter </button></form>';       
+          '<button type="submit"><a href="connexion.php"> Se Connecter </a></button>';
+          echo"<br><br>"; 
         }
       ?>
-    <button type="" name="voir_panier"><a href="panier.php">Voir panier</a></button>
+      <button type="" name="voir_panier"><a href="panier.php">Voir panier</a></button>
     </div>
 
     <fieldset>
       <img src="/image/recherche.png" height=35px/>
-    <form action="rechercheProduitsGenerique.php" method="get">
-      <p>Catégorie</p>
-      <select name="catégorie" id="categorie" onchange="OnSelectionChange()">
-      </select>
-      <script>
-        let categorieList = document.getElementById('categorie').options;
-        categorieOptions.forEach(option =>
-          categorieList.add(
-            new Option(option.text, option.value)
-          )
-        );
-        
-      </script>
-      <br>
-      <p>Marque</p>
-      <select name="marque" id="marque" onchange="OnSelectionChange()">
-      </select>
-      <script>
-        let marqueList = document.getElementById('marque').options;
-          marqueOptions.forEach(option =>
-          marqueList.add(
-            new Option(option.text, option.value)
-          )
-        );
-      </script>
-      <br>
-      <p>Nom</p>
-      <select name="nom" id="nom" onchange="OnSelectionChange()">
-      </select>
-      <script>
-        let nomList = document.getElementById('nom').options;
-          nomOptions.forEach(option =>
-          nomList.add(
-            new Option(option.text, option.value)
-          )
-        );
-      </script>
-      <br><br>
-      <button type="" name="" onClick="Reset()">Réinitialiser les critères</button>
-      <br>
-      <p>Prix max</p>
-      <input type="number" name="prix_max" min="1">
-      <br><br>
-      <div>
-        <button type="submit" name="rechercher">Rechercher</button>
-      </div>
-    </form>
-  
+      <form action="rechercheProduitsGenerique.php" method="get">
+        <p class="critere">Catégorie</p>
+        <select class="critere" name="catégorie" id="categorie" onchange="OnSelectionChange()">
+        </select>
+        <script>
+          let categorieList = document.getElementById('categorie').options;
+          categorieOptions.forEach(option =>
+            categorieList.add(
+              new Option(option.text, option.value)
+            )
+          );
+          
+        </script>
+        <br>
+        <p class="critere">Marque</p>
+        <select class="critere" name="marque" id="marque" onchange="OnSelectionChange()">
+        </select>
+        <script>
+          let marqueList = document.getElementById('marque').options;
+            marqueOptions.forEach(option =>
+            marqueList.add(
+              new Option(option.text, option.value)
+            )
+          );
+        </script>
+        <br>
+        <p class="critere">Nom</p>
+        <select class="critere" name="nom" id="nom" onchange="OnSelectionChange()">
+        </select>
+        <script>
+          let nomList = document.getElementById('nom').options;
+            nomOptions.forEach(option =>
+            nomList.add(
+              new Option(option.text, option.value)
+            )
+          );
+        </script>
+        <br>
+        <p class="critere">Prix max</p>
+        <input class="input_prix" type="number" name="prix_max" min="1">
+        <br><br>
+        <button class="reinitialiser" type="" name="" onClick="Reset()">Réinitialiser les critères</button>
+        <br><br>
+        <div>
+          <button type="submit" name="rechercher">Recherchez</button>
+        </div>
+      </form>
     </fieldset>
+
     <fieldset>
       <img src="/image/resultats.png" height=35px/>
-    <?php
-      if (isset($_GET['rechercher'])) {
-        $WHERE = "";
-        // echo "<h3> Liste des produits : </h3>"; 
-        // print_r($_GET);
-        foreach ($_GET as $nom => $valeur) {
-          // echo $nom;
-          // echo ": ";
-          // echo "$valeur";
-          // echo "<br>";
-          if ($valeur != "" && $nom != "rechercher") {
-            if ($WHERE == "") {
-              $WHERE .= "WHERE ";
-            } else {
-              $WHERE .= " AND ";
-            }
-            if ($nom == "prix_max") {
-              $WHERE .= "prix<=$valeur";
-            } else {
-              $WHERE .= "$nom='$valeur'";
-            }
-          }
-        }
-        $sql="SELECT * FROM produits $WHERE;";
-        // echo $sql;
-        $sth = $dbh->prepare($sql);
-        $sth->execute();
-        $result = $sth->fetchAll();
-
-        // echo "<ul>";
-        // foreach ($result as $enr) {
-        //   echo "<li>".$enr['numProduit'].$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros</li>";
-        // }
-        // echo "</ul>";
-        echo '<form action="rechercheProduitsGenerique.php" method="get">';
-          echo '<p>Veuillez entrer les Quantités ci-dessous<p>';
-          # Valider was clicked
-          foreach ($result as $enr) {
-            // echo $enr['numProduit'];
-            echo '<div>';
-              echo '<input type="number" name="'.$enr['numProduit'].'" min="0" value="'.$_SESSION['selection'][$enr['numProduit']].'">';
-              echo "<p>".$enr['numProduit'].$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros </p>";
-              // echo '<input type="checkbox" id="'.$enr['numProduit'].'" value="'.$enr['numProduit'].'">';
-              // echo '<label for="'.$enr['numProduit'].'">'.$enr['numProduit'].$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros</label>";
-            echo '</div>';
-          }
+      <?php
+        if (isset($_GET['rechercher'])) {
+          $WHERE = "";
+          // echo "<h3> Liste des produits : </h3>"; 
           // print_r($_GET);
-          echo '<br>';
-          echo '<div>';
-            echo '<button type="submit" name="valider">Valider</button>';
-          echo '</div>';
-        echo '</form>';
-      }
-    ?>
+          foreach ($_GET as $nom => $valeur) {
+            // echo $nom;
+            // echo ": ";
+            // echo "$valeur";
+            // echo "<br>";
+            if ($valeur != "" && $nom != "rechercher") {
+              if ($WHERE == "") {
+                $WHERE .= "WHERE ";
+              } else {
+                $WHERE .= " AND ";
+              }
+              if ($nom == "prix_max") {
+                $WHERE .= "prix<=$valeur";
+              } else {
+                $WHERE .= "$nom='$valeur'";
+              }
+            }
+          }
+          $sql="SELECT * FROM produits $WHERE;";
+          // echo $sql;
+          $sth = $dbh->prepare($sql);
+          $sth->execute();
+          $result = $sth->fetchAll();
 
-    <?php
-      if (isset($_GET['valider'])) {
-        foreach ($_GET as $selectId => $valeur) {
-          // echo $selectId.' => '.$valeur."  ";
-          $_SESSION['selection'][$selectId] = $valeur;
+          // echo "<ul>";
+          // foreach ($result as $enr) {
+          //   echo "<li>".$enr['numProduit'].$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros</li>";
+          // }
+          // echo "</ul>";
+          echo '<form action="rechercheProduitsGenerique.php" method="get">';
+            echo '<p>Veuillez entrer les Quantités ci-dessous<p>';
+            # Valider was clicked
+            foreach ($result as $enr) {
+              // echo $enr['numProduit'];
+              echo '<div class="align_left">';
+                echo '<input type="number" name="'.$enr['numProduit'].'" min="0" value="'.$_SESSION['selection'][$enr['numProduit']].'">';
+                echo "<p class='oneline_res'>".$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros </p>";
+                // echo '<input type="checkbox" id="'.$enr['numProduit'].'" value="'.$enr['numProduit'].'">';
+                // echo '<label for="'.$enr['numProduit'].'">'.$enr['numProduit'].$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros</label>";
+              echo '</div>';
+            }
+            // print_r($_GET);
+            echo '<br>';
+            echo '<div>';
+              echo '<button type="submit" name="valider">Validez</button>';
+            echo '</div>';
+          echo '</form>';
         }
-        // foreach ($_SESSION['selection'] as $selectId => $valeur) {
-        //   echo $selectId.' => '.$valeur."  ";
-        // }
-        echo "<script>window.location.href='panier.php';</script>";
-        exit;
-      }
-    ?>
+      ?>
+
+      <?php
+        if (isset($_GET['valider'])) {
+          foreach ($_GET as $selectId => $valeur) {
+            // echo $selectId.' => '.$valeur."  ";
+            $_SESSION['selection'][$selectId] = $valeur;
+          }
+          // foreach ($_SESSION['selection'] as $selectId => $valeur) {
+          //   echo $selectId.' => '.$valeur."  ";
+          // }
+          echo "<script>window.location.href='panier.php';</script>";
+          exit;
+        }
+      ?>
     </fieldset>
-    <!-- <script type="text/javascript" src="scriptRecherche.js"></script> -->
   </body>
 </html>
