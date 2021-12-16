@@ -82,6 +82,4 @@
 
     echo json_encode(array($categoriePossible, $marquePossible, $nomPossible), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
-
-
 ?>

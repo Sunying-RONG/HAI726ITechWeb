@@ -15,7 +15,14 @@
       <header>
          <div class="fit-picture"><img src="/image/web_logo.png" height="200px"/></div>
       </header>
-         
+      
+      <div class="menu2">
+            <p> Vous avez déjà un compte ? </p>
+            <button type="" name="se_connecter"><a href="connexion.php">Se connecter</a></button>
+            <br><br>
+            <button type=""><a href="rechercheProduitsGenerique.php">Retour à l'acceuil</a></button>
+      </div>
+
       <main>
          <?php
             //On lance la BDD
@@ -35,69 +42,55 @@
             //    .$enr['email']."</li>";
             // }
 
-            echo "</ul>";
+            // echo "</ul>";
             // ^ vérification en affichant liste des comptes
          ?>
          <?php
-               if (isset($_GET['email']) && !empty($_GET['email']) && $_GET['pass'] != "" ) { 
-                     // isset verifie qu'il y a bien un champ email pour ne pas appeller cette fonction si on arrive sur cette page pour la premiere fois
-                     // isempty verifie que le champ est bien rempli
-                     $add = "INSERT INTO clients VALUES ('".$_GET['email']."', '".$_GET['pass']."', '".$_GET['nom']."', '".$_GET['surnom']."', '".$_GET['ville']."', '"
-                     .$_GET['addresse']."', '".$_GET['tel']."');";
-                     // echo $add;
-                     // ^ test notre requete sql
-                     $dbh->query($add);
-                     // ajout du client dans la BDD
-               }
+            if (isset($_GET['email']) && !empty($_GET['email']) && $_GET['pass'] != "" ) { 
+                  // isset verifie qu'il y a bien un champ email pour ne pas appeller cette fonction si on arrive sur cette page pour la premiere fois
+                  // isempty verifie que le champ est bien rempli
+                  $add = "INSERT INTO clients VALUES ('".$_GET['email']."', '".$_GET['pass']."', '".$_GET['nom']."', '".$_GET['surnom']."', '".$_GET['ville']."', '"
+                  .$_GET['addresse']."', '".$_GET['tel']."');";
+                  // echo $add;
+                  // ^ test notre requete sql
+                  $dbh->query($add);
+                  // ajout du client dans la BDD
+                  header('location:connexion.php');
+            }
          ?>
 
          <form method="get">
-                
                 <br>
                 <fieldset>
                   <img src="/image/inscription.png" height=35px/>
-               
-                  <p>Email: <br>
-                     <input type="email" name="email" placeholder="" required/><br>
-                  </p>
-                  <p>Mot de passe:<br>
-                     <input type="password" name="pass" placeholder="" required /><br>
-                  </p>
-                  <p>Nom:<br>
-                     <input type="text" name="nom" placeholder="" required /><br> 
-                  </p>
-                  <p>Prenom:<br>
-                     <input type="text" name="surnom" placeholder="" required /><br>
-                  </p> 
-                  <p>ville:<br>
-                     <input type="text" name="ville" placeholder="" required /><br>
-                  </p>
-                  <p>addresse:<br>
-                     <input type="text" name="addresse" placeholder="" required /><br>
-                  </p>
-                  <p>Telephone:<br>
-                     <input type="text" name="tel" placeholder="" required /><br>
-                  </p>
-                  <p>
-                     <input type="submit" value="validez"/>
-                  </p>
+                  <br>
+                  <p class="critere">Email:</p>
+                  <input class="input_prix" type="email" name="email" placeholder="test@test.com" required/><br>
+                  
+                  <p class="critere">Mot de passe:</p>
+                  <input class="input_prix" type="password" name="pass" placeholder="" required /><br>
+                  
+                  <p class="critere">Nom:</p>
+                  <input class="input_prix" type="text" name="nom" placeholder="" required /><br> 
+                  
+                  <p class="critere">Prenom:</p> 
+                  <input class="input_prix" type="text" name="surnom" placeholder="" required /><br>
+                  
+                  <p class="critere">ville:</p>
+                  <input class="input_prix" type="text" name="ville" placeholder="" required /><br>
+                  
+                  <p class="critere">adresse:</p>
+                  <input class="input_prix" type="text" name="addresse" placeholder="" required /><br>
+                  
+                  <p class="critere">Telephone:</p>
+                  <input class="input_prix" type="text" name="tel" placeholder="10 chiffres" required /><br>
+
+                  <button type="submit" name="">validez</button>
                 </fieldset>
-                
          </form>
 
             
-         <div class="container">
-            <div class="left">
-                <p> Vous avez déjà un compte ? </p>
-                <button type="" name="se_connecter"><a href="connexion.php">Se connecter</a></button>
-    
-    
-                <p></p>
-                <form action="http://localhost:8888/rechercheProduitsGenerique.php">
-                <button type="submit"> Retour à l'acceuil</button>
-                </form>
-            </div>
-         </div>
+         
       </main>
    </body>
 

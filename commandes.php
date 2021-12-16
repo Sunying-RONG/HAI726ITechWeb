@@ -13,7 +13,10 @@
             <header>
                   <div class="fit-picture"><img src="/image/web_logo.png" height="200px"/></div>
             </header>
-
+            <div class="menu2">
+                  <br><br>
+                  <button type=""><a href="rechercheProduitsGenerique.php">Retour à l'acceuil</a></button>
+            </div>
             </br>
             <fieldset>
                   <img src="/image/commandes.png" height=35px/></br></br>
@@ -28,8 +31,6 @@
                         $sth = $dbh->prepare($sql);
                         $sth->execute();
                         $result = $sth->fetchAll();
-
-
                   ?>
                   <?php 
                         if(isset($_SESSION['email'])){
@@ -41,10 +42,9 @@
                              $sth->execute();
                              $result = $sth->fetchAll();
 
-
-                            echo "<ul> LISTE COMMANDES:<br>";
+                            echo "LISTE COMMANDES:<br>";
                               foreach ($result as $enr) {
-                                echo "<br><li>
+                                echo "<br><ul><li>
                                 Commande numéro ".$enr['idCommande'].", passée le".$enr['calendrier']."</li>";
                                 $ligne = "SELECT * FROM lignescommandes WHERE idCommande='".$enr['idCommande']."';";
                                 $listh = $dbh->prepare($ligne);
@@ -60,15 +60,6 @@
        
                  ?>
             </fieldset>
-            <div class="container">
-            <div class="left">
-                
-                <form action="http://localhost:8888/rechercheProduitsGenerique.php">
-                  <button type="submit"> Retour à l'acceuil</button>
-                </form>
-            </div>
-         </div>
-
       </body>
 
 
