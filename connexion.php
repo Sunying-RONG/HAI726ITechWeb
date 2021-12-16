@@ -57,7 +57,7 @@
                               print_r($_SESSION['email']);
                               // depuis commande à connexion, revenir à commande
                               if ($_SESSION['idCommande'] && $_SESSION['calendrier']) {
-                                    header('location:http://localhost:8888/panier.php');
+                                    header('location:http://localhost:8887/panier.php');
                               }
                         }
                   ?>
@@ -73,9 +73,9 @@
             </form>
             </fieldset>
             <p>Vous n'avez pas de compte ? Veuillez vous inscrire.</p>
-            <button type=""><a href="http://localhost:8888/creationCompte.php">S'inscrire</a></button>
+            <button type=""><a href="http://localhost:8887/creationCompte.php">S'inscrire</a></button>
 <br><br>
-            <form action="http://localhost:8888/rechercheProduitsGenerique.php">
+            <form action="http://localhost:8887/rechercheProduitsGenerique.php">
                 <button type="submit"> Retour à l'acceuil </button>
 
             </form>
