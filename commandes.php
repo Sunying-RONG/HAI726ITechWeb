@@ -13,10 +13,9 @@
             <header>
                   <div class="fit-picture"><img src="/image/web_logo.png" height="200px"/></div>
             </header>
-            <div class="container">
-                  <div class="left">
-                        <button type=""><a href="rechercheProduitsGenerique.php">Retour à l'acceuil</a></button>
-                  </div>
+            <div class="menu2">
+                  <br><br>
+                  <button type=""><a href="rechercheProduitsGenerique.php">Retour à l'acceuil</a></button>
             </div>
             </br>
             <fieldset>

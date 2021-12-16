@@ -385,7 +385,7 @@
           );
         </script>
         <br>
-        <p class="critere">Prix max</p>
+        <p class="critere">Prix max (euros)</p>
         <input class="input_prix" type="number" name="prix_max" min="1">
         <br><br>
         <button class="reinitialiser" type="" name="" onClick="Reset()">Réinitialiser les critères</button>
@@ -426,30 +426,27 @@
           $sth = $dbh->prepare($sql);
           $sth->execute();
           $result = $sth->fetchAll();
-
-          // echo "<ul>";
-          // foreach ($result as $enr) {
-          //   echo "<li>".$enr['numProduit'].$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros</li>";
-          // }
-          // echo "</ul>";
-          echo '<form action="rechercheProduitsGenerique.php" method="get">';
-            echo '<p>Veuillez entrer les Quantités ci-dessous<p>';
-            # Valider was clicked
-            foreach ($result as $enr) {
-              // echo $enr['numProduit'];
-              echo '<div class="align_left">';
-                echo '<input type="number" name="'.$enr['numProduit'].'" min="0" value="'.$_SESSION['selection'][$enr['numProduit']].'">';
-                echo "<p class='oneline_res'>".$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros </p>";
-                // echo '<input type="checkbox" id="'.$enr['numProduit'].'" value="'.$enr['numProduit'].'">';
-                // echo '<label for="'.$enr['numProduit'].'">'.$enr['numProduit'].$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros</label>";
+          // print_r($result);
+          if (empty($result)) {
+            echo "<br><br><div>Pas de résultat, veuillez changer critères et ressayer.</div><br><br>";
+          } else {
+            echo '<form action="rechercheProduitsGenerique.php" method="get">';
+              echo '<p>Veuillez entrer les Quantités ci-dessous<p>';
+              # Valider was clicked
+              foreach ($result as $enr) {
+                // echo $enr['numProduit'];
+                echo '<div class="align_left">';
+                  echo '<input type="number" name="'.$enr['numProduit'].'" min="0" value="'.$_SESSION['selection'][$enr['numProduit']].'">';
+                  echo "<p class='oneline_res'>".$enr['nom']." (".$enr['catégorie'].") de marque ".$enr['marque']." : ".$enr['prix']." euros </p>";
+                echo '</div>';
+              }
+              // print_r($_GET);
+              echo '<br>';
+              echo '<div>';
+                echo '<button type="submit" name="valider">Validez</button>';
               echo '</div>';
-            }
-            // print_r($_GET);
-            echo '<br>';
-            echo '<div>';
-              echo '<button type="submit" name="valider">Validez</button>';
-            echo '</div>';
-          echo '</form>';
+            echo '</form>';
+          }
         }
       ?>
 

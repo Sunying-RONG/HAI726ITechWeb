@@ -60,12 +60,14 @@
                                     echo "Bonjour, ";
                                     $_SESSION['email'] = $_GET['email'];
                               }
-                        
                               print_r($_SESSION['email']);
                               // depuis commande à connexion, revenir à commande
                               if ($_SESSION['idCommande'] && $_SESSION['calendrier']) {
-                                    header('location:http://localhost:8888/panier.php');
+                                    header('location:panier.php');
+                              } else {
+                                    header('location:rechercheProduitsGenerique.php');
                               }
+                              
                         }
                   ?>
              
