@@ -42,9 +42,9 @@
                              $sth->execute();
                              $result = $sth->fetchAll();
 
-                            echo "<ul> LISTE COMMANDES:<br>";
+                            echo "LISTE COMMANDES:<br>";
                               foreach ($result as $enr) {
-                                echo "<br><li>
+                                echo "<br><ul><li>
                                 Commande numéro ".$enr['idCommande'].", passée le".$enr['calendrier']."</li>";
                                 $ligne = "SELECT * FROM lignescommandes WHERE idCommande='".$enr['idCommande']."';";
                                 $listh = $dbh->prepare($ligne);
@@ -60,8 +60,6 @@
        
                  ?>
             </fieldset>
-            
-
       </body>
 
 

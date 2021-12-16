@@ -456,11 +456,20 @@
             // echo $selectId.' => '.$valeur."  ";
             $_SESSION['selection'][$selectId] = $valeur;
           }
-          // foreach ($_SESSION['selection'] as $selectId => $valeur) {
-          //   echo $selectId.' => '.$valeur."  ";
-          // }
-          echo "<script>window.location.href='panier.php';</script>";
-          exit;
+          $selected = false;
+          foreach ($_SESSION['selection'] as $selectId => $valeur) {
+            if ($valeur > 0) {
+              $selected = true;
+              break;
+            }
+          }
+          if ($selected) {
+            echo "<script>window.location.href='panier.php';</script>";
+            exit;
+          } else {
+            echo "<br><br><div>Vous n'avez pas de sélection.</div><br><br>";
+          }
+          
         }
       ?>
     </fieldset>

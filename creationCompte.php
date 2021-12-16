@@ -55,6 +55,7 @@
                   // ^ test notre requete sql
                   $dbh->query($add);
                   // ajout du client dans la BDD
+                  header('location:connexion.php');
             }
          ?>
 
@@ -64,7 +65,7 @@
                   <img src="/image/inscription.png" height=35px/>
                   <br>
                   <p class="critere">Email:</p>
-                  <input class="input_prix" type="email" name="email" placeholder="" required/><br>
+                  <input class="input_prix" type="email" name="email" placeholder="test@test.com" required/><br>
                   
                   <p class="critere">Mot de passe:</p>
                   <input class="input_prix" type="password" name="pass" placeholder="" required /><br>
@@ -78,11 +79,11 @@
                   <p class="critere">ville:</p>
                   <input class="input_prix" type="text" name="ville" placeholder="" required /><br>
                   
-                  <p class="critere">addresse:</p>
+                  <p class="critere">adresse:</p>
                   <input class="input_prix" type="text" name="addresse" placeholder="" required /><br>
                   
                   <p class="critere">Telephone:</p>
-                  <input class="input_prix" type="text" name="tel" placeholder="" required /><br>
+                  <input class="input_prix" type="text" name="tel" placeholder="10 chiffres" required /><br>
 
                   <button type="submit" name="">validez</button>
                 </fieldset>
