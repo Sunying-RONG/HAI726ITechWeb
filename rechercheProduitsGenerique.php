@@ -90,7 +90,7 @@
 
         const xhr = new XMLHttpRequest(),
           method = "GET",
-          url = "http://localhost:8887/dynamique.php";
+          url = "http://localhost:8888/dynamique.php";
         let url2 = url+"?c="+categorieChoisi+"&m="+marqueChoisi+"&n="+nomChoisi;
         console.log(url2);
         xhr.open(method, url2, true);
@@ -120,7 +120,7 @@
               categorieOptions = [];
               categorieOptions.push(
                 {
-                  text: 'tous',
+                  text: '--',
                   value: ''
                 }
               );
@@ -153,7 +153,7 @@
               marqueOptions = [];
               marqueOptions.push(
                 {
-                  text: 'tous',
+                  text: '--',
                   value: ''
                 }
               );
@@ -187,7 +187,7 @@
               nomOptions = [];
               nomOptions.push(
                 {
-                  text: 'tous',
+                  text: '--',
                   value: ''
                 }
               );
@@ -235,7 +235,7 @@
       var categorieOptions = new Array();
       categorieOptions.push(
         {
-          text: 'tous',
+          text: '--',
           value: ''
         }
       );
@@ -258,7 +258,7 @@
       var marqueOptions = new Array();
       marqueOptions.push(
         {
-          text: 'tous',
+          text: '--',
           value: ''
         }
       );
@@ -281,7 +281,7 @@
       var nomOptions = new Array();
       nomOptions.push(
         {
-          text: 'tous',
+          text: '--',
           value: ''
         }
       );
@@ -299,7 +299,24 @@
         document.getElementById('categorie').options[0].selected = true;
         document.getElementById('marque').options[0].selected = true;
         document.getElementById('nom').options[0].selected = true;
-        OnSelectionChange();
+        const xhr = new XMLHttpRequest(),
+          method = "GET",
+          url = "http://localhost:8888/rechercheProduitsGenerique.php";
+        console.log(url);
+        xhr.open(method, url, true);
+        xhr.onreadystatechange = function () {
+          // In local files, status is 0 upon success in Mozilla Firefox
+          if(xhr.readyState === XMLHttpRequest.DONE) {
+            var status = xhr.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+              console.log("initialiser succes")
+            } else {
+              console.log("initialiser error");
+              // Oh no! There has been an error with the request!
+            }
+          }
+        };
+        xhr.send();
       }
 
     </script>
@@ -313,16 +330,16 @@
           echo "Bonjour, <br>";
           print_r($_SESSION['email']);
           echo "<br><br>";
-          echo'<a href="http://localhost:8887/deconnexion.php"><button type="button">Déconnexion</button></a>';
+          echo'<a href="http://localhost:8888/deconnexion.php"><button type="button">Déconnexion</button></a>';
           echo"<br><br>";
-          echo'<a href="http://localhost:8887/commandes.php"><button type="button">Historique</button></a>';
+          echo'<a href="http://localhost:8888/commandes.php"><button type="button">Historique</button></a>';
           echo"<br><br>";
         }
         else {  
           echo 
-          '<form action="http://localhost:8887/creationCompte.php"><button type="submit"> S\'inscrire </button></form>';
+          '<form action="http://localhost:8888/creationCompte.php"><button type="submit"> S\'inscrire </button></form>';
           echo
-          '<form action="http://localhost:8887/connexion.php"><button type="submit"> Se Connecter </button></form>';       
+          '<form action="http://localhost:8888/connexion.php"><button type="submit"> Se Connecter </button></form>';       
         }
       ?>
     <button type="" name="voir_panier"><a href="panier.php">Voir panier</a></button>
@@ -377,24 +394,7 @@
         <button type="submit" name="rechercher">Rechercher</button>
       </div>
     </form>
-    <script>
-        
-        // document.getElementById("categorie").onchange = changeCategorie;
-        // function changeCategorie(){
-        //    php echo global $categorieChoisi;= this.value;
-        //    console.log("##categorieChoisi",this.value);
-        // }
-        // document.getElementById("marque").onchange = changeMarque;
-        // function changeMarque(){
-        //    $_SESSION["marqueChoisi"]= this.value;
-        //    console.log("marque",this.value);
-        // }
-        // document.getElementById("nom").onchange = changeNom;
-        // function changeNom(){
-        //    $_SESSION["nomChoisi"]= this.value;
-        //    console.log("nom",this.value);
-        // }
-    </script>
+  
     </fieldset>
     <fieldset>
       <img src="/image/resultats.png" height=35px/>
@@ -462,7 +462,8 @@
         // foreach ($_SESSION['selection'] as $selectId => $valeur) {
         //   echo $selectId.' => '.$valeur."  ";
         // }
-        header('location:http://localhost:8887/panier.php');
+        echo "<script>window.location.href='panier.php';</script>";
+        exit;
       }
     ?>
     </fieldset>

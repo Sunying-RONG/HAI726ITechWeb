@@ -93,7 +93,7 @@
     
     
                 <p></p>
-                <form action="http://localhost:8887/rechercheProduitsGenerique.php">
+                <form action="http://localhost:8888/rechercheProduitsGenerique.php">
                 <button type="submit"> Retour à l'acceuil</button>
                 </form>
             </div>
