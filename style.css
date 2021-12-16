@@ -39,9 +39,19 @@ header{
   position:absolute;
   margin-top:none;
   object-position: right;
-  width: 15%;
+  width: 10%;
   display:inline-table;
   background-color:#a2a2a2;
+  text-align: center;
+  height: 100%;
+}
+
+.menu2{
+  position:absolute;
+  margin: top 20px;;
+  object-position: right;
+  width: 18%;
+  display:inline-table;
   text-align: center;
   height: 100%;
 }

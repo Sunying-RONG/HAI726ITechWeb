@@ -15,6 +15,19 @@
       <header>
          <div class="fit-picture"><img src="/image/web_logo.png" height="200px"/></div>
       </header>
+
+      <div class="menu2">
+            <br><br>
+            <p> Vous avez déjà un compte ? </p>
+            <button type="" name="se_connecter"><a href="connexion.php">Se connecter</a></button>
+
+
+            <p></p>
+            <form action="http://localhost:8888/rechercheProduitsGenerique.php">
+            <button type="submit"> Retour à l'acceuil</button>
+            </form>
+        
+     </div>
          
       <main>
          <?php
@@ -86,18 +99,7 @@
          </form>
 
             
-         <div class="container">
-            <div class="left">
-                <p> Vous avez déjà un compte ? </p>
-                <button type="" name="se_connecter"><a href="connexion.php">Se connecter</a></button>
-    
-    
-                <p></p>
-                <form action="http://localhost:8888/rechercheProduitsGenerique.php">
-                <button type="submit"> Retour à l'acceuil</button>
-                </form>
-            </div>
-         </div>
+       
       </main>
    </body>
 

@@ -14,6 +14,13 @@
                   <div class="fit-picture"><img src="/image/web_logo.png" height="200px"/></div>
             </header>
 
+            <div class="menu2">
+            
+                  <br><br>
+                  <form action="http://localhost:8888/rechercheProduitsGenerique.php">
+                        <button type="submit"> Retour à l'acceuil</button>
+                  </form>
+             </div>
             </br>
             <fieldset>
                   <img src="/image/commandes.png" height=35px/></br></br>
@@ -60,14 +67,8 @@
        
                  ?>
             </fieldset>
-            <div class="container">
-            <div class="left">
-                
-                <form action="http://localhost:8888/rechercheProduitsGenerique.php">
-                  <button type="submit"> Retour à l'acceuil</button>
-                </form>
-            </div>
-         </div>
+           
+         
 
       </body>
 

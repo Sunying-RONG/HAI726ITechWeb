@@ -16,6 +16,10 @@
             <div class="fit-picture"><img src="/image/web_logo.png" height="200px"/></div>
         </header>
 
+        <div class="menu2">
+             <br><br>
+             <button type=""><a href="rechercheProduitsGenerique.php">Retour à l'acceuil</a></button>
+        </div>
         <Fieldset>
             <img src="/image/panier.png" height=35px/>
             <br><br>
@@ -134,6 +138,6 @@
                 }
             ?>
         </fieldset>
-        <button type=""><a href="rechercheProduitsGenerique.php">Retour à l'acceuil</a></button>
+
     </body>
 </html>

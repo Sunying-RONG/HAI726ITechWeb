@@ -13,7 +13,15 @@
             <header>
                   <div class="fit-picture"><img src="/image/web_logo.png" height="200px"/></div>
             </header>
-
+            <div class=menu2>
+                  <br><br>
+                  <p>Vous n'avez pas de compte? Veuillez vous inscrire.</p>
+                  <button type=""><a href="http://localhost:8888/creationCompte.php">S'inscrire</a></button>
+                  <br><br>
+                  <form action="http://localhost:8888/rechercheProduitsGenerique.php">
+                  <button type="submit"> Retour à l'acceuil </button>
+                  </form>
+            </div>
             </br>
             <fieldset>
                   <img src="/image/connexion.png" height=35px/></br></br>
@@ -68,17 +76,12 @@
                         <br>
                         Mot de passe:
                         <input type="password" name="pass" placeholder="" required /></br>
+                        <br>
                         <input type="submit" value="validez"/>
 
             </form>
             </fieldset>
-            <p>Vous n'avez pas de compte ? Veuillez vous inscrire.</p>
-            <button type=""><a href="http://localhost:8888/creationCompte.php">S'inscrire</a></button>
-<br><br>
-            <form action="http://localhost:8888/rechercheProduitsGenerique.php">
-                <button type="submit"> Retour à l'acceuil </button>
-
-            </form>
+      
 
       </body>
 
