@@ -11,21 +11,14 @@ http://localhost:8888/rechercheProduitsGenerique.php
 Note :  
 X2go Linux, Mysql database of university  
 1. Dans le terminal :  
-    mysql -h mysql.etu.umontpellier.fr -u e20210011437 -p  
+    mysql -h mysql.etu.umontpellier.fr -u e*********** -p  
 2. Entrer password  
 `>show databases;`  
-`>use e20210011437` // use database   
+`>use e***********` // use database   
 `>show tables;`  
 `>describe tableName;` // show structure de table   
 `>source produits.sql;` import script, mise a jour, create table  
 `>select * from produits` afficher les tuples, les donees  
-
-https://phpmyadmin.etu.umontpellier.fr  
-e20210011437  
-mysql...  
-
-database centrale, php peut etre local  
-pdo  
 
 if a server already execute  
 `>ps -edf`  
