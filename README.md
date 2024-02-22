@@ -1,5 +1,5 @@
 # HAI726ITechWeb
-Un site web du shopping en php.
+Un site web du shopping simple en php pour pratiquer.
 
 LANCEMENT DU PROJET:  
 En utilisant la base de données mysql de l'Université de Montpellier, pour utiliser les données, on doit lancer le projet dans ordinateur ou système de x2go de l'Université.  
